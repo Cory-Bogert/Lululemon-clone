@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .user import User
 from .items import Item
+from .reviews import Review
 
 class Comment(db.Model):
     __tablename__ = 'comments'
