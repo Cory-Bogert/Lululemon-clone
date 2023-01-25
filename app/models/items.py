@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .user import User
 # from .item_image import Item_image
-# from .reviews import Review
+from .reviews import Review
 # from .cart import Cart
 # from .wishlist import Wishlist
 # from .purchased_item import Purchased_Item
@@ -33,7 +33,7 @@ class Item(db.Model):
             'name': self.name,
             'category': self.category,
             'color': self.color,
-            'price': self.price,
+            'price': str(self.price),
             'size': self.size,
             'stocked': self.stocked,
             'previewImg': self.previewImg
@@ -45,10 +45,10 @@ class Item(db.Model):
             'name': self.name,
             'category': self.category,
             'color': self.color,
-            'price': self.price,
+            'price': str(self.price),
             'size': self.size,
             'stocked': self.stocked,
             'previewImg': self.previewImg,
             # 'Item_image': Item_image.query.get(self).to_dict(),
-            # 'Review': Review.query.get(self.)
+            'Review':[review.to_dict() for review in Review.query.all() if int(review.itemId) == int(self.id)]
         }
