@@ -4,11 +4,11 @@ from app.models import db, Comment, environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_comment():
     comment1 = Comment(
-        userId=1, itemId=1)
+        userId=1, reviewId=1, description='nice review!')
     comment2 = Comment(
-        userId=2, itemId=2)
+        userId=2, reviewId=2, description='nice review!')
     comment3 = Comment(
-        userId=3, itemId=3)
+        userId=3, reviewId=3, description='nice review!')
 
     db.session.add(comment1)
     db.session.add(comment2)

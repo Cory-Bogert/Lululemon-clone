@@ -1,10 +1,10 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .user import User
-from .item_image import Item_image
-from .reviews import Review
-from .cart import Cart
-from .wishlist import Wishlist
-from .purchased_item import Purchased_Item
+# from .item_image import Item_image
+# from .reviews import Review
+# from .cart import Cart
+# from .wishlist import Wishlist
+# from .purchased_item import Purchased_Item
 
 class Item(db.Model):
     __tablename__ = 'items'
