@@ -1,17 +1,18 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, NavLink, Route } from 'react-router-dom'
+import { Link, NavLink, Route, useParams } from 'react-router-dom'
 import { fetchAllItems, fetchOneItem } from '../../store/item';
 import { useEffect, useState } from 'react';
 
 function Landing() {
+    const { id } = useParams()
     const dispatch = useDispatch()
     const itemsObj = useSelector(state => state.items)
     const items = Object.values(itemsObj)
     console.log(items, '000000000000000')
 
     useEffect(() => {
-        dispatch(fetchAllItems())
+        dispatch(fetchOneItem(id))
     }, [dispatch])
 
     if(!items) return null

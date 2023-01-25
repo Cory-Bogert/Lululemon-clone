@@ -11,3 +11,15 @@ item_routes = Blueprint('items', __name__)
 @item_routes.route('')
 def all_items():
     return {'Items':[item.to_dict_full() for item in Item.query.all()]}
+
+#get item by id
+@item_routes.route('/<int:id>')
+def single_item(id):
+    singleItem = Item.query.get(id)
+    if singleItem:
+        return singleItem.to_dict_full()
+    return {
+        'message':'Error',
+        'errors':['Item could not be found'],
+        'statusCode': 404
+    }, 404
