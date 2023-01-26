@@ -4,39 +4,46 @@ import { Link, NavLink, Route, useParams } from 'react-router-dom'
 import { fetchAllItems, fetchOneItem } from '../../store/item';
 import { useEffect, useState } from 'react';
 
-function Landing() {
+function SingleItemPage() {
     const { id } = useParams()
     const dispatch = useDispatch()
-    const itemsObj = useSelector(state => state.items)
-    const items = Object.values(itemsObj)
-    console.log(items, '000000000000000')
+    // console.log(items, '000000000000000')
 
     useEffect(() => {
         dispatch(fetchOneItem(id))
     }, [dispatch])
 
-    if(!items) return null
+    // const oneItem = useSelector(state => state.item)
+    const item = useSelector(state => {return state.items[id]})
+    console.log(item, 'this is 2nd useSelector')
+    // console.log(state, 'stattteee')
+    // console.log('---------', oneItem)
+    // if(!oneItem) return null
 
     return (
         <>
         <div>
-            {items.map(item =>{
-                return (
+            {
+
                     <div>
-                    <NavLink to={`/items/${item.id}`} className='itemlist-links'>
+                        <p>Hello</p>
+                        <img src={item.previewImg} width='200px'/>
+                        <p>{item.description}</p>
+                        {/* <img src={oneItem.previewImg} width='200px'/> */}
+                    {/* <NavLink to={`/items/${item.id}`} className='itemlist-links'>
 
                     <img src={item.previewImg} width='200px'/>
                     <h4>{item.name}</h4>
                     <h4>{item.price}</h4>
-                    </NavLink>
+                    </NavLink> */}
                     </div>
                     // <p>{item.name}</p>
-                    )
-            })}
+
+            }
         </div>
 
         </>
     )
 }
 
-export default Landing;
+export default SingleItemPage;

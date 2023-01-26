@@ -23,8 +23,8 @@ export const fetchAllItems = () => async dispatch => {
     if(response.status>=400) throw response
 }
 
-export const fetchOneItem = (itemId) => async dispatch => {
-    const response = await fetch(`/api/items/${itemId}`)
+export const fetchOneItem = (id) => async dispatch => {
+    const response = await fetch(`/api/items/${id}`)
     if(response.ok){
         const singleItem = await response.json()
         dispatch(getOne(singleItem))

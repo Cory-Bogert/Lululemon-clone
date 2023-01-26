@@ -24,7 +24,7 @@ def seed_purchased_item():
 # it will reset the primary keys for you as well.
 def undo_purchased_item():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.purchased_items RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM purchased_items")
 

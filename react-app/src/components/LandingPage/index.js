@@ -23,6 +23,7 @@ function Landing() {
                 return (
                     <div>
                     <NavLink to={`/items/${item.id}`} className='itemlist-links'>
+                    {/* <p>{item.id} ddddd</p> */}
 
                     <img src={item.previewImg} width='200px'/>
                     <h4>{item.name}</h4>

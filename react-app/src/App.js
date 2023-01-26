@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import Landing from './components/LandingPage';
 import { authenticate } from './store/session';
+import SingleItemPage from './components/SingleItemPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -33,8 +34,8 @@ function App() {
         <Route path='/' exact={true}>
           <Landing />
         </Route>
-        <Route path='/items/:itemId' exact={true}>
-          <Landing />
+        <Route path='/items/:id' exact={true}>
+          <SingleItemPage />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
