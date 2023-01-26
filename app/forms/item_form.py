@@ -15,3 +15,4 @@ class ItemForm(FlaskForm):
     size = StringField('size', validators=[DataRequired()])
     stocked = BooleanField('fundingGoal', validators=[DataRequired()])
     previewImg = StringField('previewImg')
+    description = StringField('description', validators=[DataRequired()])

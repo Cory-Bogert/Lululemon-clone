@@ -20,6 +20,7 @@ class Item(db.Model):
     size = db.Column(db.Integer, nullable=False)
     stocked = db.Column(db.Boolean, nullable=False)
     previewImg = db.Column(db.String(1000))
+    description = db.Column(db.String(1000))
 
     item_images = db.relationship('ItemImage', back_populates='item', cascade='all, delete')
     reviews = db.relationship('Review', back_populates='item', cascade='all, delete')
@@ -36,7 +37,8 @@ class Item(db.Model):
             'price': str(self.price),
             'size': self.size,
             'stocked': self.stocked,
-            'previewImg': self.previewImg
+            'previewImg': self.previewImg,
+            'description': self.description
         }
 
     def to_dict_full(self):
@@ -49,6 +51,7 @@ class Item(db.Model):
             'size': self.size,
             'stocked': self.stocked,
             'previewImg': self.previewImg,
+            'description': self.description,
             # 'Item_image': Item_image.query.get(self).to_dict(),
             'Review':[review.to_dict() for review in Review.query.all() if int(review.itemId) == int(self.id)]
         }

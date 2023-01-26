@@ -7,7 +7,9 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import Landing from './components/LandingPage';
 import { authenticate } from './store/session';
+import SingleItemPage from './components/SingleItemPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,6 +30,13 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+
+        <Route path='/' exact={true}>
+          <Landing />
+        </Route>
+        <Route path='/items/:id' exact={true}>
+          <SingleItemPage />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
