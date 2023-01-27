@@ -8,19 +8,19 @@ from .auth_routes import validation_errors_to_error_messages
 review_routes = Blueprint('reviews', __name__)
 
 #get all review data
-@review_routes.route('')
+@review_routes.route('/reviews')
 def all_reviews():
-    return {'Reviews':[review.to_dict_full() for review in Review.query.all()]}
+    return {'Reviews':[review.to_dict() for review in Review.query.all()]}
 
 #get all current user reviews
-@review_routes.route('/current')
+@review_routes.route('/reviews/current')
 @login_required
 def current_review():
     currId = current_user.get_id()
     return {'Reviews':[review.to_dict() for review in Review.query.all() if review.userId == int(currId)]}
 
 #get review based on id
-@review_routes.route('/<int:id>')
+@review_routes.route('/items/<int:id>/reviews')
 def single_review(id):
     oneReview = Review.query.get(id)
     if oneReview:
@@ -32,7 +32,7 @@ def single_review(id):
     }, 404
 
 #create review
-@review_routes.route('/<int:id>', methods=['POST'])
+@review_routes.route('/items/<int:id>/reviews', methods=['POST'])
 @login_required
 def add_review(id):
     item = Item.query.get(id)
@@ -52,7 +52,7 @@ def add_review(id):
         db.session.commit()
         return item.to_dict_full()
 
-@review_routes.route('/<int:id>', methods=['PUT'])
+@review_routes.route('/reviews/<int:id>', methods=['PUT'])
 @login_required
 def edit_review(id):
     current_review = Review.query.get(id)
@@ -67,7 +67,7 @@ def edit_review(id):
         db.session.commit()
         return current_review.to_dict()
 
-@review_routes.route('/<int:id>', methods=['DELETE'])
+@review_routes.route('/reviews/<int:id>', methods=['DELETE'])
 @login_required
 def delete_review(id):
     current_review = Review.query.get(id)
@@ -78,5 +78,3 @@ def delete_review(id):
         'message':'Successfully deleted',
         'statusCode':200
     },200
-
-
