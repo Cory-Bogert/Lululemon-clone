@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DecimalField, BooleanField
+from wtforms import StringField, DecimalField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, ValidationError
 # from app.models import Review
 
@@ -7,6 +7,5 @@ from wtforms.validators import DataRequired, ValidationError
 
 
 class ReviewForm(FlaskForm):
-    rating = DecimalField('rating', validators=[DataRequired()])
+    rating = IntegerField('rating', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
-

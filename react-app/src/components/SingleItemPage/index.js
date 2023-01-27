@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, Route, useParams } from 'react-router-dom'
 import { fetchAllItems, fetchOneItem } from '../../store/item';
 import { useEffect, useState } from 'react';
+import './index.css'
 
 function SingleItemPage() {
     const { id } = useParams()
@@ -22,25 +23,26 @@ function SingleItemPage() {
 
     return (
         <>
-        <div>
+
             {
-
-                    <div>
-                        <p>Hello</p>
-                        <img src={item.previewImg} width='200px'/>
-                        <p>{item.description}</p>
-                        {/* <img src={oneItem.previewImg} width='200px'/> */}
-                    {/* <NavLink to={`/items/${item.id}`} className='itemlist-links'>
-
-                    <img src={item.previewImg} width='200px'/>
-                    <h4>{item.name}</h4>
-                    <h4>{item.price}</h4>
-                    </NavLink> */}
+                <div className='wrapper-container'>
+                    <div className='single-img-container'>
+                        <img className='img' src={item.previewImg} />
                     </div>
-                    // <p>{item.name}</p>
+                    <div className='single-item-details'>
+
+
+
+                        <span>{item.name}</span>
+                        <p>{item.description}</p>
+                        <p>{item.price}</p>
+                    </div>
+
+                </div>
+
 
             }
-        </div>
+
 
         </>
     )
