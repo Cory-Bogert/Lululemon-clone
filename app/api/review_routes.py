@@ -45,7 +45,7 @@ def add_review(id):
         print('------------')
         review=Review(
             userId=current_user.id,
-            itemId=item.id
+            itemId=item.id,
         )
         form.populate_obj(review)
         db.session.add(review)

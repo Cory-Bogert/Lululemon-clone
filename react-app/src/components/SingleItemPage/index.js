@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, Route, useParams } from 'react-router-dom'
 import { fetchAllItems, fetchOneItem } from '../../store/item';
-import { getAllReviews } from '../../store/review';
+import { fetchDeleteReview, getAllReviews } from '../../store/review';
 import { useEffect, useState } from 'react';
-import AllReviews from '../Reviews';
 import './index.css'
+import CreateReview from '../Reviews/CreateReview';
 
 function SingleItemPage() {
     const { id } = useParams()
@@ -13,6 +13,7 @@ function SingleItemPage() {
 
 
     useEffect(() => {
+        dispatch(fetchAllItems())
         dispatch(fetchOneItem(id))
         dispatch(getAllReviews(id))
     }, [dispatch, id])
@@ -26,14 +27,18 @@ function SingleItemPage() {
 
     const reviewsObj = useSelector(state => state.reviews)
 
-    const reviews = Object.values(reviewsObj)
-    console.log(reviews, ' allllll the reviews    ')
+    const reviews = Object.values(reviewsObj).filter(e => e.itemId == id)
+    console.log(reviews, ' allllll the reviews')
+
+    const handleDeleteReview = (id) => {
+        dispatch(fetchDeleteReview(id))
+    }
 
 
-    if(!item || !itemReviews || !reviews) return
+    if(!item || !reviews ) return null
 
     return (
-        <>
+        <div>
 
 
                 <div className='wrapper-container'>
@@ -59,28 +64,31 @@ function SingleItemPage() {
             {reviews.length ? (reviews.map(({id, itemId, description, rating, userId})  =>(
             <div key={id} className='reviewbox'>
             <div className='reviewlist'>
-                <h5>{userId}</h5>
+                <h1>review id{id}</h1>
+                <h5>user id={userId}</h5>
                 <h3 className='reviewlist-details'>★{rating}</h3>
                 <p className='reviewlist-details'>{description}</p>
-                <p>{itemId}</p>
+                <p>item id{itemId}</p>
+                <button onClick={()=>handleDeleteReview(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
 
 
 
 
             </div>
             </div>
-            )
-
-            )) : (<div className='review-form-container'>
+            ))) : (<div className='review-form-container'>
                     <div>
                         {item.name} has no reviews yet. Leave a review!
                     </div>
-                </div>)
-            }
+                </div>)}
+            <div className='create-review'>
+                <CreateReview />
+            </div>
+
         </div>
 
 
-        </>
+        </div>
     )
 }
 
