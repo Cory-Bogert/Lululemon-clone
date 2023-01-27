@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-# from .user import User
+from .user import User
 # from .items import Item
 
 class Review(db.Model):
@@ -24,5 +24,15 @@ class Review(db.Model):
             'userId': self.userId,
             'itemId': self.itemId,
             'rating': self.rating,
-            'description': self.description
+            'description': self.description,
+        }
+
+    def to_dict_full(self):
+        return {
+            'id': self.id,
+            'userId': self.userId,
+            'itemId': self.itemId,
+            'rating': self.rating,
+            'description': self.description,
+            'user': self.user.to_dict()
         }

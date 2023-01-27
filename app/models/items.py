@@ -53,5 +53,6 @@ class Item(db.Model):
             'previewImg': self.previewImg,
             'description': self.description,
             # 'Item_image': Item_image.query.get(self).to_dict(),
-            'Review':[review.to_dict() for review in Review.query.all() if int(review.itemId) == int(self.id)]
+            'Review':[review.to_dict() for review in Review.query.all() if (review.itemId) == (self.id)]
+
         }
