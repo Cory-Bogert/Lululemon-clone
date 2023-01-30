@@ -8,7 +8,7 @@ from .auth_routes import validation_errors_to_error_messages
 review_routes = Blueprint('reviews', __name__)
 
 #get all review data
-@review_routes.route('/reviews')
+@review_routes.route('/api/reviews')
 def all_reviews():
     return {'Reviews':[review.to_dict() for review in Review.query.all()]}
 
@@ -20,7 +20,7 @@ def current_review():
     return {'Reviews':[review.to_dict() for review in Review.query.all() if review.userId == int(currId)]}
 
 #get review based on id
-@review_routes.route('/items/<int:id>/reviews')
+@review_routes.route('/api/items/<int:id>/reviews')
 def single_review(id):
     oneReview = Review.query.get(id)
     if oneReview:
@@ -32,7 +32,7 @@ def single_review(id):
     }, 404
 
 #create review
-@review_routes.route('/items/<int:id>/reviews', methods=['POST'])
+@review_routes.route('/api/items/<int:id>/reviews', methods=['POST'])
 @login_required
 def add_review(id):
     item = Item.query.get(id)
@@ -52,22 +52,36 @@ def add_review(id):
         db.session.commit()
         return item.to_dict_full()
 
-@review_routes.route('/reviews/<int:id>', methods=['PUT'])
+@review_routes.route('/api/reviews/<int:id>', methods=['PUT'])
 @login_required
 def edit_review(id):
     current_review = Review.query.get(id)
+    if not current_review:
+        return {
+            'message':'HTTP Error',
+            'errors':'Review could not be found',
+            'statusCode': 404
+        }, 404
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     currId = current_user.get_id()
-    print('---------', currId)
-    print('000000000000', current_review)
+    if int(current_review.userId) != int(currId):
+        return {
+          'message':'Forbidden Error',
+          'errors': ['The review does not belongs to the current user'],
+          'statusCode': 403
+        }, 403
+    # print('---------', currId)
+    # print('000000000000', current_review)
     if form.validate_on_submit():
+        # review=Review.query.get(form.data["itemId"])
+        # print(review, 'dddddddddddddddd')
         form.populate_obj(current_review)
         db.session.add(current_review)
         db.session.commit()
         return current_review.to_dict()
 
-@review_routes.route('/reviews/<int:id>', methods=['DELETE'])
+@review_routes.route('/api/reviews/<int:id>', methods=['DELETE'])
 @login_required
 def delete_review(id):
     current_review = Review.query.get(id)

@@ -8,6 +8,7 @@ const CreateReview = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const { id } = useParams()
+    
     console.log('this is the id coming back', id)
 
     const [rating, setRating] = useState(0)

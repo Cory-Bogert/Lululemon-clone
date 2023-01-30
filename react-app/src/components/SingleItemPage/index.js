@@ -2,10 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, Route, useParams } from 'react-router-dom'
 import { fetchAllItems, fetchOneItem } from '../../store/item';
-import { fetchDeleteReview, getAllReviews } from '../../store/review';
+import { fetchCreateReview, fetchDeleteReview, getAllReviews } from '../../store/review';
 import { useEffect, useState } from 'react';
 import './index.css'
 import CreateReview from '../Reviews/CreateReview';
+// import EditFormReview from '../Reviews/EditReview';
+import { fetchUpdateReview } from '../../store/review';
 
 function SingleItemPage() {
     const { id } = useParams()
@@ -20,19 +22,71 @@ function SingleItemPage() {
 
 
     const item = useSelector(state => {return state.items[id]})
-    console.log(item, 'this is 2nd useSelector')
+    // console.log(item, 'this is 2nd useSelector')
 
     const itemReviews = useSelector(state => Object.values(state.items))
-    console.log( itemReviews, '---------------')
+    // console.log( itemReviews, '---------------')
 
     const reviewsObj = useSelector(state => state.reviews)
+    // console.log(reviewsObj, 'dddddddddddddddddddd')
 
     const reviews = Object.values(reviewsObj).filter(e => e.itemId == id)
-    console.log(reviews, ' allllll the reviews')
+    // console.log(reviews, ' allllll the reviews')
+
+
+
 
     const handleDeleteReview = (id) => {
         dispatch(fetchDeleteReview(id))
     }
+
+    const EditFormReview = () => {
+        // const { id } = useParams()
+        
+        // console.log(reviewId[0].id, 'dddddddddddddddddddddddddddddddddddddddddd')
+        const dispatch = useDispatch()
+        const [rating, setRating] = useState(0)
+        const [description, setDescription] = useState('')
+
+        const updateDescription = (e) => setDescription(e.target.value)
+        const updateRating = (e) => setRating(e.target.value)
+
+
+        const handleSubmit = async (e) => {
+            e.preventDefault()
+            const updateRevew = {
+                 rating,
+                 description
+            }
+
+            await dispatch(fetchUpdateReview(updateRevew, id))
+            await dispatch(fetchOneItem(id))
+        }
+
+        return (
+            <form onSubmit={handleSubmit}>
+                 <input
+                className='input'
+                placeholder="Description"
+                id="description"
+                type="text"
+                required
+                value={description}
+                onChange={updateDescription} />
+
+                <input
+                className='input'
+                placeholder="Leave a rating"
+                id="rating"
+                type="number"
+                required
+                value={rating}
+                onChange={updateRating} />
+
+                <button className='submit-btn' type='submit'>Edit Review</button>
+                </form>
+        )
+        }
 
 
     if(!item || !reviews ) return null
@@ -70,6 +124,13 @@ function SingleItemPage() {
                 <p className='reviewlist-details'>{description}</p>
                 <p>item id{itemId}</p>
                 <button onClick={()=>handleDeleteReview(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
+                {/* <button onClick={()=>EditFormReview(itemId)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button> */}
+
+
+                 { <div className='edit-review'>
+                    <EditFormReview />
+                </div> }
+
 
 
 
@@ -82,7 +143,7 @@ function SingleItemPage() {
                     </div>
                 </div>)}
             <div className='create-review'>
-                <CreateReview />
+                <CreateReview itemId={id}/>
             </div>
 
         </div>

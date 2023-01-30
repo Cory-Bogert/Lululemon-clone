@@ -57,8 +57,8 @@ export const fetchCreateReview = (review, itemId) => async dispatch => {
     if(response.status>=400) throw response
 }
 
-export const fetchUpdateReview = (review) => async dispatch => {
-    const response = await fetch(`api/reviews/${review.id}`, {
+export const fetchUpdateReview = (review, itemId) => async dispatch => {
+    const response = await fetch(`/api/reviews/${itemId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
