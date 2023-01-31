@@ -23,15 +23,24 @@ function SingleItemPage() {
 
 
     const item = useSelector(state => {return state.items[id]})
-
-
-    const itemReviews = useSelector(state => Object.values(state.items))
-
+    // const itemReviews = useSelector(state => Object.values(state.items))
 
     const reviewsObj = useSelector(state => state.reviews)
-
-
     const reviews = Object.values(reviewsObj).filter(e => e.itemId == id)
+    // console.log(reviews)
+
+    let totalRatingArray = []
+    let totalRating = 0
+    if(reviews){
+        totalRatingArray = Object.values(reviews)
+        totalRatingArray.forEach(ratings => {
+            totalRating += parseInt(ratings.rating)
+        })}
+        else return null
+    let avgRating = totalRating/totalRatingArray.length
+    // console.log(avgRating.toFixed(2))
+
+
 
 
 
@@ -68,7 +77,7 @@ function SingleItemPage() {
                     <h2>Reviews</h2>
                 </div>
                 <div className='header-rating'>
-
+                    <h4>★{avgRating.toFixed(1)}</h4>
                 </div>
             </div>
             {reviews.length ? (reviews.map(({id, itemId, description, rating, userId})  =>(
