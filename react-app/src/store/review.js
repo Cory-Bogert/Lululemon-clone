@@ -41,6 +41,14 @@ export const getAllReviews = () => async dispatch => {
     // if(response.status>=400) throw response
 }
 
+// export const fetchItemReviews = (itemId) => async dispatch => {
+//     const response = await fetch(`/api/items/${itemId}/reviews`)
+//     if(response.ok){
+//         const reviewList = await response.json()
+//         dispatch(getItemReviews(reviewList))
+//     }
+// }
+
 export const fetchCreateReview = (review, itemId) => async dispatch => {
     const response = await fetch(`/api/items/${itemId}/reviews`, {
         method: 'POST',
@@ -57,8 +65,8 @@ export const fetchCreateReview = (review, itemId) => async dispatch => {
     if(response.status>=400) throw response
 }
 
-export const fetchUpdateReview = (review, itemId) => async dispatch => {
-    const response = await fetch(`/api/reviews/${itemId}`, {
+export const fetchUpdateReview = (review) => async dispatch => {
+    const response = await fetch(`/api/reviews/${review.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

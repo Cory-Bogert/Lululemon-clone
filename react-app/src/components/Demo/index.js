@@ -6,12 +6,11 @@ import './index.css'
 function DemoUser() {
   const dispatch = useDispatch();
 
-  const [errors, setErrors] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors([]);
-    dispatch(sessionActions.login({ credential:'demo@aa.io', password:'password' }))}
+
+    dispatch(sessionActions.login('demo@aa.io','password' ))}
     return(
         <button className="demo-btn" onClick={handleSubmit} type="submit">Demo User</button>
     )

@@ -6,7 +6,8 @@ import { fetchCreateReview, fetchDeleteReview, getAllReviews } from '../../store
 import { useEffect, useState } from 'react';
 import './index.css'
 import CreateReview from '../Reviews/CreateReview';
-// import EditFormReview from '../Reviews/EditReview';
+import CreateReviewModal from '../Reviews/CreateReview/createReviewModal';
+import EditFormReview from '../Reviews/EditReview';
 import { fetchUpdateReview } from '../../store/review';
 
 function SingleItemPage() {
@@ -22,16 +23,16 @@ function SingleItemPage() {
 
 
     const item = useSelector(state => {return state.items[id]})
-    // console.log(item, 'this is 2nd useSelector')
+
 
     const itemReviews = useSelector(state => Object.values(state.items))
-    // console.log( itemReviews, '---------------')
+
 
     const reviewsObj = useSelector(state => state.reviews)
-    // console.log(reviewsObj, 'dddddddddddddddddddd')
+
 
     const reviews = Object.values(reviewsObj).filter(e => e.itemId == id)
-    // console.log(reviews, ' allllll the reviews')
+
 
 
 
@@ -40,61 +41,10 @@ function SingleItemPage() {
         dispatch(fetchDeleteReview(id))
     }
 
-    const EditFormReview = () => {
-        // const { id } = useParams()
-        
-        // console.log(reviewId[0].id, 'dddddddddddddddddddddddddddddddddddddddddd')
-        const dispatch = useDispatch()
-        const [rating, setRating] = useState(0)
-        const [description, setDescription] = useState('')
-
-        const updateDescription = (e) => setDescription(e.target.value)
-        const updateRating = (e) => setRating(e.target.value)
-
-
-        const handleSubmit = async (e) => {
-            e.preventDefault()
-            const updateRevew = {
-                 rating,
-                 description
-            }
-
-            await dispatch(fetchUpdateReview(updateRevew, id))
-            await dispatch(fetchOneItem(id))
-        }
-
-        return (
-            <form onSubmit={handleSubmit}>
-                 <input
-                className='input'
-                placeholder="Description"
-                id="description"
-                type="text"
-                required
-                value={description}
-                onChange={updateDescription} />
-
-                <input
-                className='input'
-                placeholder="Leave a rating"
-                id="rating"
-                type="number"
-                required
-                value={rating}
-                onChange={updateRating} />
-
-                <button className='submit-btn' type='submit'>Edit Review</button>
-                </form>
-        )
-        }
-
-
     if(!item || !reviews ) return null
 
     return (
         <div>
-
-
                 <div className='wrapper-container'>
                     <div className='single-img-container'>
                         <img className='img' src={item.previewImg} />
@@ -112,9 +62,15 @@ function SingleItemPage() {
                 </div>
 
 
-
-
         <div className='reviews'>
+            <div className='review-header'>
+                <div className='header-title'>
+                    <h2>Reviews</h2>
+                </div>
+                <div className='header-rating'>
+
+                </div>
+            </div>
             {reviews.length ? (reviews.map(({id, itemId, description, rating, userId})  =>(
             <div key={id} className='reviewbox'>
             <div className='reviewlist'>
@@ -128,7 +84,7 @@ function SingleItemPage() {
 
 
                  { <div className='edit-review'>
-                    <EditFormReview />
+                    <EditFormReview review={{id, itemId, description, rating, userId}} />
                 </div> }
 
 
