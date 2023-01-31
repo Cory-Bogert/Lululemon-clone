@@ -9,13 +9,18 @@ const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [city, setCity] = useState('')
+  const [state, setState] = useState('')
+  const [address, setAddress] = useState('')
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, password, firstName, lastName, city, state, address));
       if (data) {
         setErrors(data)
       }
@@ -36,6 +41,26 @@ const SignUpForm = () => {
 
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
+  };
+
+  const updateFirstName= (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName= (e) => {
+    setLastName(e.target.value);
+  };
+
+  const updateCity= (e) => {
+    setCity(e.target.value);
+  };
+
+  const updateState= (e) => {
+    setState(e.target.value);
+  };
+
+  const updateAddress= (e) => {
+    setAddress(e.target.value);
   };
 
   if (user) {
@@ -84,6 +109,51 @@ const SignUpForm = () => {
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
+        ></input>
+      </div>
+      <div>
+        <label>First Name</label>
+        <input
+          type='text'
+          name='firstName'
+          onChange={updateFirstName}
+          value={firstName}
+        ></input>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input
+          type='text'
+          name='lastName'
+          onChange={updateLastName}
+          value={lastName}
+        ></input>
+      </div>
+      <div>
+        <label>City</label>
+        <input
+          type='text'
+          name='city'
+          onChange={updateCity}
+          value={city}
+        ></input>
+      </div>
+      <div>
+        <label>State</label>
+        <input
+          type='text'
+          name='state'
+          onChange={updateState}
+          value={state}
+        ></input>
+      </div>
+      <div>
+        <label>Address</label>
+        <input
+          type='text'
+          name='address'
+          onChange={updateAddress}
+          value={address}
         ></input>
       </div>
       <button type='submit'>Sign Up</button>

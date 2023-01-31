@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { fetchAllItems } from '../../store/item';
 import { useEffect } from 'react';
 import { getAllReviews } from '../../store/review';
+import './index.css'
 
 function Landing() {
     const dispatch = useDispatch()
@@ -20,7 +21,7 @@ function Landing() {
 
     return (
         <>
-        <div>
+        <div className='items-container'>
             {items.map(item =>{
                 return (
                     <div>
