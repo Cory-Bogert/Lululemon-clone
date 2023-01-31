@@ -2,27 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { fetchOneItem } from '../../../store/item';
+import { useModal } from '../../../context/Modal';
 import { fetchUpdateReview, getAllReviews } from '../../../store/review';
+
 
 const EditFormReview = ({review}) => {
     const dispatch = useDispatch()
+    // const { closeModal } = useModal()
 
-    // const tempReview = useSelector(state=> Object.values(state.reviews))
-    // console.log(tempReview, 'this is the id from editform review')
-
-    // const currReview = tempReview.find(review => review.id === id)
-    // console.log(currReview, 'dal;kdjslslslslsllss')
-
-
-    // const currReview = useSelector(state => state.reviews[reviewId])
-    // console.log(currReview, 'this is currrrent')
     const [rating, setRating] = useState(0)
     const [description, setDescription] = useState('')
+    const [validationErrors, setValidationErrors] = useState([])
 
     const updateDescription = (e) => setDescription(e.target.value)
     const updateRating = (e) => setRating(e.target.value)
 
+    useEffect(() => {
+        const errors = []
+        if(!description.length){errors.push('Please Provide a Review to update')}
+        if(rating < 1 || rating > 5){errors.push('Rating must be between 1 and 5')}
 
+        setValidationErrors(errors)
+    }, [description, rating])
 
 
     const handleSubmit = async (e) => {
@@ -34,10 +35,16 @@ const EditFormReview = ({review}) => {
         }
 
         await dispatch(fetchUpdateReview(updateReview))
+        // closeModal()
         // await dispatch(fetchOneItem(id))
     }
 
     return (
+        <div className='edit-review-container'>
+
+    <div>
+        {validationErrors.length > 0 && validationErrors.map((error) => <div className="errors-container" key={error}>{error}</div>)}
+    </div>
         <form onSubmit={handleSubmit}>
              <input
             className='input'
@@ -57,11 +64,9 @@ const EditFormReview = ({review}) => {
             value={rating}
             onChange={updateRating} />
 
-            <button className='submit-btn' type='submit'>Edit Review</button>
+            <button className='submit-btn' type='submit' disabled={validationErrors.length>0}>Edit Review</button>
             </form>
+        </div>
     )
     }
     export default EditFormReview
-
-
-
