@@ -4,11 +4,11 @@ from app.models import db, Review, environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_review():
     review1 = Review(
-        userId=1, itemId=1, rating=3, description='this is a review')
+        userId=1, itemId=1, title='Fantastic!', rating=3, description='this is a review')
     review2 = Review(
-        userId=2, itemId=2, rating=3, description='this is a review')
+        userId=2, itemId=2, title='Fantastic!', rating=3, description='this is a review')
     review3 = Review(
-        userId=3, itemId=3, rating=3, description='this is a review')
+        userId=3, itemId=3, title='Fantastic!', rating=3, description='this is a review')
 
     db.session.add(review1)
     db.session.add(review2)

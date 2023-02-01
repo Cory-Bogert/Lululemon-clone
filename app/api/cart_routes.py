@@ -11,7 +11,7 @@ cart_routes = Blueprint('carts', __name__)
 #get all cart data --- SHOULD NEVER USE
 @cart_routes.route('')
 def all_carts():
-    return {'Carts':[car.to_dict_full() for car in Cart.query.all()]}
+    return {'Carts':[cart.to_dict_full() for cart in Cart.query.all()]}
 
 
 @cart_routes.route('/current')
@@ -59,5 +59,3 @@ def add_item():
         "errors":validation_errors_to_error_messages(form.errors),
         'statusCode': 400
         },400
-
-

@@ -10,6 +10,7 @@ const CreateReview = ({ closeModal }) => {
     const history = useHistory()
     const { id } = useParams()
 
+    const [title, setTitle] = useState('')
     const [rating, setRating] = useState(0)
     const [description, setDescription] = useState('')
 
@@ -17,15 +18,18 @@ const CreateReview = ({ closeModal }) => {
 
     useEffect(() => {
         const errors = []
-        if(!description.length){errors.push('Please Provide a Review to post')}
+        if(title.length > 40){errors.push('Please provide a title with less than 40 characters')}
+        if(!description.length){errors.push('Please provide a Review to update')}
+        if(description.length > 255){errors.push('Please provide a description with less than 255 characters')}
         if(rating < 1 || rating > 5){errors.push('Rating must be between 1 and 5')}
 
         setValidationErrors(errors)
-    }, [description, rating])
+    }, [description, rating, title])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const review = {
+            title,
             rating,
             description
         }
@@ -43,6 +47,16 @@ const CreateReview = ({ closeModal }) => {
                 {validationErrors.length > 0 && validationErrors.map((error) => <div className="errors-container" key={error}>{error}</div>)}
             </div>
             <form onSubmit={handleSubmit}>
+
+                <input
+                className='input'
+                placeholder="Title"
+                id="title"
+                type="text"
+                required
+                value={title}
+                onChange={e => setTitle(e.target.value)} />
+
                 <input
                 placeholder="Leave a review"
                 className="input"

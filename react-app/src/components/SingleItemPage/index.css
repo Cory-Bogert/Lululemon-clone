@@ -42,7 +42,8 @@
     /* border: solid 1px red; */
     display: flex;
     padding-top: 10px;
-    box-shadow: 0px 2px 1px #EDECEA;
+    box-shadow: 0px 3px 1px #EDECEA, 0px -1px 1px #EDECEA;
+
     background: #FFFFFF;
     margin-left: 20px;
     margin-right: 20px;
@@ -67,20 +68,13 @@
 }
 
 .delete-button {
-    display: flex;
-    /* flex-direction: column; */
-    align-items: center;
-    justify-content: center;
-    /* width: 5vw; */
-    margin: 0;
-    /* padding-bottom: 10px; */
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background: none;
-    /* size: 20rem; */
-    font-size: x-large;
-    padding-bottom: 18px;
+    background-color: black;
+    border-radius: 5px;
+    width: 10rem;
+    height: 3rem;
+    color: white;
+    font-size: 1.5rem;
+    padding-right: 1rem;
 }
 
 .buttons i{
@@ -161,6 +155,17 @@
 
 .edit-review {
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+    justify-content: right;
+    margin-bottom: 5px;
+
+}
+
+.edit-review-btn {
+    background-color: black;
+    border-radius: 5px;
+    width: 10rem;
+    height: 3rem;
+    color: white;
+    font-size: 1.5rem;
+    margin-left: 1rem;
 }

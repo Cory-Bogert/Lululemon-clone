@@ -34,6 +34,6 @@ class Cart(db.Model):
             'price': str(self.price),
             'quantity': self.quantity,
             'Item': Item.query.get(self.itemId).to_dict(),
-            'user': self.user.to_dict()
+            # 'user': self.user.to_dict()
 
         }
