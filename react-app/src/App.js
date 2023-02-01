@@ -29,12 +29,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <Navigation /> */}
+      <Navigation />
       <Switch>
 
-        <Route path='/' exact={true}>
-          <Landing />
-        </Route>
         <Route path='/items/:id' exact={true}>
           <SingleItemPage />
         </Route>
@@ -50,6 +47,9 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
+        <Route path='/' exact={true}>
+          <Landing />
+        </Route>
         {/* <Route path='/' exact={true} >
           <h1>My Home Page</h1>
         </Route> */}
