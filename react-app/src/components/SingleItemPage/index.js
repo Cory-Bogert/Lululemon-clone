@@ -108,10 +108,11 @@ function SingleItemPage() {
                     {/* <CreateReview itemId={id} /> */}
                 </div>
             </div>
-            {reviews.length ? (reviews.map(({id, itemId, description, rating, userId})  =>(
+            {reviews.length ? (reviews.map(({id, itemId, title, description, rating, userId})  =>(
             <div key={id} className='reviewbox'>
             <div className='reviewlist'>
                 <h1>{userId}UserName</h1>
+                <h2>{title}</h2>
                 {/* <h3 className='reviewlist-details'>{rating}★</h3> */}
                 {rating === 1 && <h3><i class="fa-solid fa-star"></i></h3>}
                 {rating === 2 && <h3><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></h3>}
@@ -123,9 +124,9 @@ function SingleItemPage() {
 
                  {sessionUser.id === userId ?(
                   <div className='edit-review'>
-                    <EditFormReview review={{id, itemId, description, rating, userId}} />
-                    <button onClick={()=>handleDeleteReview(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
-                    {/* <EditReviewModal review={{id, itemId, description, rating, userId}} /> */}
+                    {/* <EditFormReview review={{id, itemId, description, rating, userId}} /> */}
+                    <button onClick={()=>handleDeleteReview(id)} className='delete-button'>Delete</button>
+                    <EditReviewModal review={{id, itemId, title, description, rating, userId}} />
                 </div> ): null}
 
 

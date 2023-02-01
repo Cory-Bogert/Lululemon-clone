@@ -7,5 +7,6 @@ from wtforms.validators import DataRequired, ValidationError
 
 
 class ReviewForm(FlaskForm):
+    title = StringField('title')
     rating = IntegerField('rating', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])

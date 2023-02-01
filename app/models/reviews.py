@@ -11,6 +11,7 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     itemId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('items.id')))
+    title = db.Column(db.String(50))
     rating = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(1000), nullable=False)
 
@@ -23,6 +24,7 @@ class Review(db.Model):
             'id': self.id,
             'userId': self.userId,
             'itemId': self.itemId,
+            'title': self.title,
             'rating': self.rating,
             'description': self.description,
         }
@@ -32,6 +34,7 @@ class Review(db.Model):
             'id': self.id,
             'userId': self.userId,
             'itemId': self.itemId,
+            'title': self.title,
             'rating': self.rating,
             'description': self.description,
             'user': self.user.to_dict()

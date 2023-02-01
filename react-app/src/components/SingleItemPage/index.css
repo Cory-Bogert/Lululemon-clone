@@ -1,5 +1,6 @@
 :root {
     background: #FAFAFA;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .wrapper-container {
     display: flex;
@@ -41,7 +42,8 @@
     /* border: solid 1px red; */
     display: flex;
     padding-top: 10px;
-    box-shadow: 0px 2px 1px #EDECEA;
+    box-shadow: 0px 3px 1px #EDECEA, 0px -1px 1px #EDECEA;
+
     background: #FFFFFF;
     margin-left: 20px;
     margin-right: 20px;
@@ -65,17 +67,14 @@
     margin-right: 20px;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* width: 5vw; */
-    margin: 0;
-    padding: 0;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    /* background-color: none; */
+.delete-button {
+    background-color: black;
+    border-radius: 5px;
+    width: 10rem;
+    height: 3rem;
+    color: white;
+    font-size: 1.5rem;
+    padding-right: 1rem;
 }
 
 .buttons i{
@@ -100,7 +99,7 @@
 .review-header {
     border-top: solid 2px #d5d5d5;
     padding-top: 2.5em;
-    grid-template-columns: 10rem 14rem auto;
+    grid-template-columns: 16rem 14rem auto;
     margin-bottom: 1.25rem;
     display: grid;
     /* height: 150px; */
@@ -152,4 +151,21 @@
     height: 5rem;
     color: white;
     font-size: 1.5rem;
+}
+
+.edit-review {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 5px;
+
+}
+
+.edit-review-btn {
+    background-color: black;
+    border-radius: 5px;
+    width: 10rem;
+    height: 3rem;
+    color: white;
+    font-size: 1.5rem;
+    margin-left: 1rem;
 }

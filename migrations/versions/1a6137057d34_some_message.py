@@ -100,6 +100,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=True),
     sa.Column('itemId', sa.Integer(), nullable=True),
+    sa.Column('title', sa.String(length=50)),
     sa.Column('rating', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=1000), nullable=False),
     sa.ForeignKeyConstraint(['itemId'], ['items.id'], ),

@@ -13,7 +13,7 @@ def all_reviews():
     return {'Reviews':[review.to_dict() for review in Review.query.all()]}
 
 #get all current user reviews
-@review_routes.route('/reviews/current')
+@review_routes.route('/api/reviews/current')
 @login_required
 def current_review():
     currId = current_user.get_id()

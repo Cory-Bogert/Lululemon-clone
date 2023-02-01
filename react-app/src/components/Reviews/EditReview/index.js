@@ -10,26 +10,31 @@ const EditFormReview = ({review}) => {
     const dispatch = useDispatch()
     // const { closeModal } = useModal()
 
+    const [title, setTitle] = useState('')
     const [rating, setRating] = useState(0)
     const [description, setDescription] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
 
+    const updateTitle = (e) => setTitle(e.target.value)
     const updateDescription = (e) => setDescription(e.target.value)
     const updateRating = (e) => setRating(e.target.value)
 
     useEffect(() => {
         const errors = []
-        if(!description.length){errors.push('Please Provide a Review to update')}
+        if(title.length > 40){errors.push('Please provide a title with less than 40 characters')}
+        if(!description.length){errors.push('Please provide a Review to update')}
+        if(description.length > 255){errors.push('Please provide a description with less than 255 characters')}
         if(rating < 1 || rating > 5){errors.push('Rating must be between 1 and 5')}
 
         setValidationErrors(errors)
-    }, [description, rating])
+    }, [description, rating, title])
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const updateReview = {
             id:review.id,
+            title,
             rating,
             description
         }
@@ -46,7 +51,17 @@ const EditFormReview = ({review}) => {
         {validationErrors.length > 0 && validationErrors.map((error) => <div className="errors-container" key={error}>{error}</div>)}
     </div>
         <form onSubmit={handleSubmit}>
-             <input
+
+            <input
+            className='input'
+            placeholder="Title"
+            id="title"
+            type="text"
+            required
+            value={title}
+            onChange={updateTitle} />
+
+            <input
             className='input'
             placeholder="Description"
             id="description"
@@ -64,7 +79,7 @@ const EditFormReview = ({review}) => {
             value={rating}
             onChange={updateRating} />
 
-            <button className='submit-btn' type='submit' disabled={validationErrors.length>0}>Edit Review</button>
+            <button className='edit-submit-btn' type='submit' disabled={validationErrors.length>0}>Edit Review</button>
             </form>
         </div>
     )
