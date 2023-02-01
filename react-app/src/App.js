@@ -29,7 +29,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navigation />
+      {/* <Navigation /> */}
       <Switch>
 
         <Route path='/' exact={true}>
