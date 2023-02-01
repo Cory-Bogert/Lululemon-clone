@@ -21,17 +21,17 @@ function Landing() {
         <>
         <div className='items-container'>
             {items.map(item =>{
-                return (
-                    <div>
-                    <NavLink to={`/items/${item.id}`} className='itemlist-links'>
-                    {/* <p>{item.id} ddddd</p> */}
+                // return (
+                //     <div>
+                //     <NavLink to={`/items/${item.id}`} className='itemlist-links'>
+                //     {/* <p>{item.id} ddddd</p> */}
 
-                    <img src={item.previewImg} alt='preview of item' width='200px'/>
-                    <h4>{item.name}</h4>
-                    <h4>{item.price}</h4>
-                    </NavLink>
-                    </div>
-                    )
+                //     <img src={item.previewImg} alt='preview of item' width='200px'/>
+                //     <h4>{item.name}</h4>
+                //     <h4>{item.price}</h4>
+                //     </NavLink>
+                //     </div>
+                //     )
             })}
         </div>
         </>
