@@ -123,9 +123,9 @@ function SingleItemPage() {
 
                  {sessionUser.id === userId ?(
                   <div className='edit-review'>
-                    <EditFormReview review={{id, itemId, description, rating, userId}} />
-                    <button onClick={()=>handleDeleteReview(id)} className='buttons'><i className="fa-solid fa-trash-can" />Delete</button>
-                    {/* <EditReviewModal review={{id, itemId, description, rating, userId}} /> */}
+                    {/* <EditFormReview review={{id, itemId, description, rating, userId}} /> */}
+                    <button onClick={()=>handleDeleteReview(id)} className='delete-button'><i className="fa-solid fa-trash-can" /></button>
+                    <EditReviewModal review={{id, itemId, description, rating, userId}} />
                 </div> ): null}
 
 

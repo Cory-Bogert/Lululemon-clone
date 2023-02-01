@@ -1,5 +1,6 @@
 :root {
     background: #FAFAFA;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .wrapper-container {
     display: flex;
@@ -65,17 +66,21 @@
     margin-right: 20px;
 }
 
-.buttons {
+.delete-button {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    align-items: center;
     justify-content: center;
     /* width: 5vw; */
     margin: 0;
-    padding: 0;
+    /* padding-bottom: 10px; */
     border: none;
     outline: none;
     cursor: pointer;
-    /* background-color: none; */
+    background: none;
+    /* size: 20rem; */
+    font-size: x-large;
+    padding-bottom: 18px;
 }
 
 .buttons i{
@@ -100,7 +105,7 @@
 .review-header {
     border-top: solid 2px #d5d5d5;
     padding-top: 2.5em;
-    grid-template-columns: 10rem 14rem auto;
+    grid-template-columns: 16rem 14rem auto;
     margin-bottom: 1.25rem;
     display: grid;
     /* height: 150px; */
@@ -152,4 +157,10 @@
     height: 5rem;
     color: white;
     font-size: 1.5rem;
+}
+
+.edit-review {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
