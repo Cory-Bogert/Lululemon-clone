@@ -98,7 +98,7 @@ def react_root(path):
 def not_found(e):
     return app.send_static_file('index.html')
 
-@app.route('/')
-def test_route():
-    return Cart.query.get(1).to_dict_full()
+# @app.route('/')
+# def test_route():
+#     return Cart.query.get(1).to_dict_full()
     # return "Welcome"
