@@ -15,13 +15,13 @@ def all_carts():
 
 
 @cart_routes.route('/current')
-@login_required
+# @login_required
 def current_cart():
     currId =current_user.get_id()
     return {'Carts':[cart.to_dict_full() for cart in Cart.query.all() if int(cart.userId) == int(currId)]}
 
 @cart_routes.route('', methods=['POST'])
-@login_required
+# @login_required
 def add_item():
     form = CartForm()
     form['csrf_token'].data = request.cookies['csrf_token']

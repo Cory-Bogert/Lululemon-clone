@@ -10,15 +10,13 @@ function Landing() {
     const dispatch = useDispatch()
     const itemsObj = useSelector(state => state.items)
     const items = Object.values(itemsObj)
-    // console.log(items, '000000000000000')
 
     useEffect(() => {
         dispatch(fetchAllItems())
-        dispatch(getAllReviews())
+        // dispatch(getAllReviews())
     }, [dispatch])
 
     if(!items) return null
-
     return (
         <>
         <div className='items-container'>
@@ -33,11 +31,9 @@ function Landing() {
                     <h4>{item.price}</h4>
                     </NavLink>
                     </div>
-                    // <p>{item.name}</p>
                     )
             })}
         </div>
-
         </>
     )
 }
