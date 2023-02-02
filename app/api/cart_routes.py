@@ -15,47 +15,66 @@ def all_carts():
 
 
 @cart_routes.route('/current')
-# @login_required
+@login_required
 def current_cart():
     currId =current_user.get_id()
     return {'Carts':[cart.to_dict_full() for cart in Cart.query.all() if int(cart.userId) == int(currId)]}
 
-@cart_routes.route('', methods=['POST'])
-# @login_required
-def add_item():
+@cart_routes.route('/add/<int:id>', methods=['POST'])
+@login_required
+def add_item(id):
+    currId = current_user.id
+    item = Item.query.get(id)
     form = CartForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
-        print('------------------------------')
-        item=Item.query.get(form.data['itemId'])
-        print('----------', item)
-        if not item:
-            return{
-                'message':'HTTP Error',
-                'errors': 'Item could not be found',
-                'statusCode': 404
-            }, 404
-        item_id = item.id
-        print('0000000000000000', item_id)
-        currId =current_user.get_id()
-        print('00000000000000000000', currId)
-        user_Cart=Cart.query.filter(Cart.itemId==item_id).filter(Cart.userId==currId).all()
-        print(user_Cart, 'bbbbbbbbbbbbbbbb')
-        # if user_Cart:
-        #     return {
-        #         'message':'Validation Error',
-        #         'errors':'one user can only have one cart',
-        #         'statusCode': 400
-        #     }, 400
-        new_cart = Cart(itemId=item_id)
-        print('zzzzzzzzzzzzzzzzzzz', new_cart)
+        # curr_cart = Cart.query.filter(Cart.userId == currId, Cart.itemId == item.id)
+        new_cart = Cart()
         form.populate_obj(new_cart)
         db.session.add(new_cart)
         db.session.commit()
-        return new_cart.to_dict_full()
+        return new_cart.to_dict_full(), 201
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-    return {
-        'message':'Validation Error',
-        "errors":validation_errors_to_error_messages(form.errors),
-        'statusCode': 400
-        },400
+@cart_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_cart(id):
+    cart = Cart.query.get(id)
+    db.session.delete(cart)
+    db.session.commit()
+    return current_user.to_dict(), 200
+
+
+
+
+
+
+
+
+
+
+        # print('====================')
+        # curr_cart = Cart.query.filter(Cart.userId==currId, Cart.itemId==item.id).first()
+        # print(curr_cart, '-***************-')
+        # if curr_cart and not form:
+        #     print('77777777777777777')
+        #     curr_cart.quantity += 1
+        #     db.session.commit()
+        #     return curr_cart.to_dict()
+        # elif curr_cart:
+        #     print('8888888888888')
+        #     curr_cart.quantity = form.data['quantity']
+        #     print('4444444444444444444')
+        #     db.session.commit()
+        #     return curr_cart.to_dict_full()
+        # else:
+        #     print('99999999999999999999999999')
+        #     new_cart = Cart(
+        #         item_id=item.id,
+        #         quantity=form.data['quantity'],
+        #         user_id=currId
+        #     )
+        #     db.session.add(new_cart)
+        #     db.session.commit()
+        #     return new_cart.to_dict()

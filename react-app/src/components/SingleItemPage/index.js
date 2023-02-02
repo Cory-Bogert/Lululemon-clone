@@ -17,21 +17,51 @@ function SingleItemPage() {
     const { id } = useParams()
     const dispatch = useDispatch()
 
-
     useEffect(() => {
         dispatch(fetchAllItems())
         dispatch(fetchOneItem(id))
         dispatch(getAllReviews(id))
     }, [dispatch, id])
 
-
     const item = useSelector(state => {return state.items[id]})
-    // const itemReviews = useSelector(state => Object.values(state.items))
-
     const reviewsObj = useSelector(state => state.reviews)
     const reviews = Object.values(reviewsObj).filter(e => e.itemId == id)
-    // console.log(reviews)
+
     const sessionUser = useSelector(state => state.session.user)
+    // let allReviewsByCurrent = ''
+    // allReviewsByCurrent = (reviews.filter(review => review.userId === sessionUser.id))
+    // console.log(allReviewsByCurrent, ' this is slalllllllllllllllllllllllll')
+    // let userReviews = ''
+    // userReviews = allReviewsByCurrent.find(review => review.userId == id)
+    // console.log(userReviews, 'userrrrrrrrrrrrrrrrrrrrrrrrrr')
+
+    // const editButtons = ({id, itemId, title, description, rating, userId}) => {
+    //     if(!allReviewsByCurrent.length) return
+    //     else if(sessionUser.id == userReviews.userId){
+    //         return (
+    //             <button onClick={()=>handleDeleteReview(id)} className='delete-button'>Delete</button>,
+    //             <EditReviewModal review={{id, itemId, title, description, rating, userId}} />
+    //         )
+    //     } else {
+    //         return null
+    //     }
+    // }
+
+    // console.log(sessionUser.id, 'this is the session user id')
+    // console.log(userReviews.userId, ' this is the all reviews current.userId')
+    // console.log(Object.values(allReviewsByCurrent), ' ---------------------------------------')
+
+    // const deleteButtons = ({id, itemId, title, description, rating, userId}) => {
+    //     if(!allReviewsByCurrent.length) return
+    //     else if(sessionUser.id == userReviews.userId){
+    //         return (
+    //             <button onClick={()=>handleDeleteReview(id)} className='delete-button'>Delete</button>
+    //             // <EditReviewModal review={{id, itemId, title, description, rating, userId}} />
+    //         )
+    //     } else {
+    //         return null
+    //     }
+    // }
 
     let totalRatingArray = []
     let totalRating = 0
@@ -43,7 +73,10 @@ function SingleItemPage() {
         else return null
     let avgRating = totalRating/totalRatingArray.length
 
-    console.log(sessionUser, ' this is session user')
+    // console.log(reviews, 'this is the reviews')
+    // console.log(sessionUser.id, 'this is the sessionUser data')
+
+
 
 
 
@@ -121,8 +154,13 @@ function SingleItemPage() {
                 {rating === 5 && <h3><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></h3>}
                 <p className='reviewlist-details'>{description}</p>
 
+                <div className='edit-review'>
+                {/* {deleteButtons({id})}
+                {editButtons({id, itemId, title, description, rating, userId})} */}
 
-                 {sessionUser.id === userId ?(
+                </div>
+
+                {sessionUser.id === userId ?(
                   <div className='edit-review'>
                     {/* <EditFormReview review={{id, itemId, description, rating, userId}} /> */}
                     <button onClick={()=>handleDeleteReview(id)} className='delete-button'>Delete</button>
