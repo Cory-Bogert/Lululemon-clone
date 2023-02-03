@@ -11,7 +11,9 @@ cart_routes = Blueprint('carts', __name__)
 #get all cart data --- SHOULD NEVER USE
 @cart_routes.route('')
 def all_carts():
-    return {'Carts':[cart.to_dict_full() for cart in Cart.query.all()]}
+    carts = Cart.query.filter(Cart.userId == current_user.id).all()
+    return {'Carts': [cart.to_dict_full() for cart in carts]}
+    # return {'Carts':[cart.to_dict_full() for cart in Cart.query.all()]}
 
 
 @cart_routes.route('/current')
@@ -20,11 +22,11 @@ def current_cart():
     currId =current_user.get_id()
     return {'Carts':[cart.to_dict_full() for cart in Cart.query.all() if int(cart.userId) == int(currId)]}
 
-@cart_routes.route('/add/<int:id>', methods=['POST'])
+@cart_routes.route('/add', methods=['POST'])
 @login_required
-def add_item(id):
+def add_item():
     currId = current_user.id
-    item = Item.query.get(id)
+    # item = Item.query.get(id)
     form = CartForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 

@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux';
 import LoginFormModal from '../LoginFormModal';
 import DemoUser from '../Demo';
 import LogoutButton from '../auth/LogoutButton';
+import CartButtonModal from '../Carts/CartButtonModal';
+import './index.css'
+import SignupFormModal from '../SignupFormModal';
 
 function Navigation({ isLoaded }){
     const sessionUser = useSelector(state => state.session.user)
@@ -14,15 +17,17 @@ function Navigation({ isLoaded }){
         <nav className='navbar-container'>
           <div className='logo-container'>
 
-            <div className='logo-name'><NavLink className='logo-name' exact to='/'>LuluMelon</NavLink></div>
             </div>
 
             <div className='welcome-container'>{sessionUser ? (`Welcome, ${sessionUser.username}!`): ('Welcome to LuluMelon')}</div>
+            <div className='logo-name'><NavLink className='logo-name' exact to='/'>LuluMelon</NavLink></div>
             <div className='navbar-right'>
-            <div className='create-spot'>
+            <div className='btn-container'>
               <LoginFormModal />
               <DemoUser />
+              <SignupFormModal />
               <LogoutButton />
+              <CartButtonModal />
             </div>
 
             <div className='user-container'>

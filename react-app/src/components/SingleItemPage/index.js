@@ -11,6 +11,8 @@ import CreateReview from '../Reviews/CreateReview';
 import CreateReviewModal from '../Reviews/CreateReview/createReviewModal';
 import EditFormReview from '../Reviews/EditReview';
 import EditReviewModal from '../Reviews/EditReview/EditReviewModal';
+import { fetchAllCarts, fetchCreateCart } from '../../store/cart';
+import CartButtonModal from '../Carts/CartButtonModal';
 // import { fetchUpdateReview } from '../../store/review';
 
 function SingleItemPage() {
@@ -21,6 +23,8 @@ function SingleItemPage() {
         dispatch(fetchAllItems())
         dispatch(fetchOneItem(id))
         dispatch(getAllReviews(id))
+        dispatch(fetchAllCarts())
+        // dispatch(fetchCart(1))
     }, [dispatch, id])
 
     const item = useSelector(state => {return state.items[id]})
@@ -28,6 +32,7 @@ function SingleItemPage() {
     const reviews = Object.values(reviewsObj).filter(e => e.itemId == id)
 
     const sessionUser = useSelector(state => state.session.user)
+
     // let allReviewsByCurrent = ''
     // allReviewsByCurrent = (reviews.filter(review => review.userId === sessionUser.id))
     // console.log(allReviewsByCurrent, ' this is slalllllllllllllllllllllllll')
@@ -73,14 +78,15 @@ function SingleItemPage() {
         else return null
     let avgRating = totalRating/totalRatingArray.length
 
-    // console.log(reviews, 'this is the reviews')
-    // console.log(sessionUser.id, 'this is the sessionUser data')
-
-
-
-
-
-
+    const addItemBtn = (itemId, userId, price, quantity) => {
+        const payload = {
+            itemId,
+            userId,
+            price,
+            quantity: 5
+        }
+        dispatch(fetchCreateCart(payload))
+    }
 
     const handleDeleteReview = (id) => {
         dispatch(fetchDeleteReview(id))
@@ -95,6 +101,7 @@ function SingleItemPage() {
                         <img className='img' src={item.previewImg} />
                     </div>
                     <div className='single-item-details'>
+                        {sessionUser?.id ? <btn onClick={()=>addItemBtn(item.id, sessionUser.id, item.price)} className='delete-button'>Add</btn> : null}
 
 
 
@@ -160,7 +167,7 @@ function SingleItemPage() {
 
                 </div>
 
-                {sessionUser.id === userId ?(
+                {sessionUser?.id === userId ?(
                   <div className='edit-review'>
                     {/* <EditFormReview review={{id, itemId, description, rating, userId}} /> */}
                     <button onClick={()=>handleDeleteReview(id)} className='delete-button'>Delete</button>

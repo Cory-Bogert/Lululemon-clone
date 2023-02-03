@@ -20,6 +20,34 @@
 
   #modal-content {
     position: absolute;
+    background-color: white;
     /* background-color:white; */
-    border-radius: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: fit-content;
+    /* width: 80%;
+    height: 80% */
+  }
+
+  #cart-modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  #cart-modal-content {
+    position: absolute;
+    background-color: white;
+    /* background-color:white; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: fit-content;
+    width: 80%;
+    height: 80%;
+
   }

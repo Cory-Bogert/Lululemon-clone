@@ -1,18 +1,19 @@
 //action types
-const READ_CART = 'reviews/READ_CART'
-const CREATE_CART = 'reviews/CREATE_CART'
-const UPDATE_CART = 'reviews/UPDATE_CART'
-const DELETE_CART = 'reviews/DELETE_CART'
+const READ_CARTS = 'carts/READ_CARTS'
+// const READ_CART = 'carts/READ_CART'
+const CREATE_CART = 'carts/CREATE_CART'
+const UPDATE_CART = 'carts/UPDATE_CART'
+const DELETE_CART = 'carts/DELETE_CART'
 
 //action creators
-const getCart = ({Cart}) => ({
-    type: READ_CART,
-    Cart
+const getAllCarts = ({Carts}) => ({
+    type: READ_CARTS,
+    Carts
 })
 
-// const getOneReview = (review) => ({
-//     type: READ_SINGLE_REVIEW,
-//     review
+// const getCart = (cart) => ({
+//     type: READ_CART,
+//     cart
 // })
 
 const createCart = (cart) => ({
@@ -20,10 +21,10 @@ const createCart = (cart) => ({
     cart
 })
 
-const editCart = (cart) => ({
-    type: UPDATE_CART,
-    cart
-})
+// const editCart = (cart) => ({
+//     type: UPDATE_CART,
+//     cart
+// })
 
 const deleteCart = (id) => ({
     type: DELETE_CART,
@@ -31,14 +32,22 @@ const deleteCart = (id) => ({
 })
 
 //thunks
-export const fetchCart = (userId) => async dispatch => {
-    const response = await fetch(`/api/carts/${userId}`)
+export const fetchAllCarts = () => async dispatch => {
+    const response = await fetch(`/api/carts`);
     if(response.ok){
-        const cartList = await response.json()
-        dispatch(getCart(cartList))
+        const cartsList = await response.json()
+        dispatch(getAllCarts(cartsList))
     }
-    // if(response.status>=400) throw response
 }
+
+// export const fetchCart = () => async dispatch => {
+//     const response = await fetch(`/api/carts/current`)
+//     if(response.ok){
+//         const cartList = await response.json()
+//         dispatch(getCart(cartList))
+//     }
+
+// }
 
 // export const fetchItemReviews = (itemId) => async dispatch => {
 //     const response = await fetch(`/api/items/${itemId}/reviews`)
@@ -48,8 +57,8 @@ export const fetchCart = (userId) => async dispatch => {
 //     }
 // }
 
-export const fetchCreateCart = (cart, itemId) => async dispatch => {
-    const response = await fetch(`/api/items/${itemId}/reviews`, {
+export const fetchCreateCart = (cart) => async dispatch => {
+    const response = await fetch(`/api/carts/add`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -64,21 +73,21 @@ export const fetchCreateCart = (cart, itemId) => async dispatch => {
     if(response.status>=400) throw response
 }
 
-export const fetchUpdateCart = (cart) => async dispatch => {
-    const response = await fetch(`/api/carts/${cart.id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(cart)
-    })
-    if(response.ok){
-        const editedCart = await response.json()
-        dispatch(editCart(editedCart))
-        return editedCart
-    }
-    if(response.status>=400) throw response
-}
+// export const fetchUpdateCart = (cart) => async dispatch => {
+//     const response = await fetch(`/api/carts/${cart.id}`, {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(cart)
+//     })
+//     if(response.ok){
+//         const editedCart = await response.json()
+//         dispatch(editCart(editedCart))
+//         return editedCart
+//     }
+//     if(response.status>=400) throw response
+// }
 
 export const fetchDeleteCart = (id) => async dispatch => {
     const response = await fetch(`/api/carts/${id}`, {
@@ -92,31 +101,39 @@ export const fetchDeleteCart = (id) => async dispatch => {
 }
 
 //reducer
-const initialState = {}
+const initialState = {items:[]}
 
 const cartsReducer = (state = initialState, action) => {
-    let newState;
+    let newState = {items:[]};
     switch(action.type){
-        case READ_CART:
-            newState={...state}
+        case READ_CARTS:
+            // newState={...state}
             action.Carts.forEach((cart) => {
-                newState[cart.id] = cart
+                newState[cart.id] = cart;
+                newState.items.push(cart.Item)
             })
             return newState
 
+        // case READ_CART:
+        //     newState={...state}
+        //     newState[action.cart.id] = action.cart
+        //     return newState
+
         case CREATE_CART:
-            newState = {...state}
+            newState = {...state, items:[...state.items]}
             newState[action.cart.id] = action.cart
+            newState.items.push(action.cart.Item)
             return newState
 
-        case UPDATE_CART:
-            newState = {...state}
-            newState[action.cart.id] = action.cart
-            return newState
+        // case UPDATE_CART:
+        //     newState = {...state}
+        //     newState[action.cart.id] = action.cart
+        //     return newState
 
         case DELETE_CART:
-            newState = {...state}
+            newState = {...state, items:[...state.items]}
             delete newState[action.id]
+            newState.items = newState.items.filter(item => item.id != action.id)
             return newState
 
         default:

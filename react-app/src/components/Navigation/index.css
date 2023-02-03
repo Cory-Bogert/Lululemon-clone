@@ -1,0 +1,38 @@
+.navbar-container {
+    /* overflow: hidden; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: space-around; */
+    /* position: absolute !important; */
+    /* left: 0 !important;
+    top: 0 !important; */
+    width: 100%;
+    /* border: red 1px solid; */
+    border-bottom: 1px lightgray solid;
+    background: white;
+}
+
+.welcome-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.logo-name {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+
+button:hover {
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }

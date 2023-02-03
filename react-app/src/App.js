@@ -11,6 +11,7 @@ import User from './components/User';
 import Landing from './components/LandingPage';
 import { authenticate } from './store/session';
 import SingleItemPage from './components/SingleItemPage';
+import CartPage from './components/Carts';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,6 +32,10 @@ function App() {
     <BrowserRouter>
       <Navigation />
       <Switch>
+
+        <Route path='/cart' exact={true}>
+          <CartPage />
+        </Route>
 
         <Route path='/items/:id' exact={true}>
           <SingleItemPage />

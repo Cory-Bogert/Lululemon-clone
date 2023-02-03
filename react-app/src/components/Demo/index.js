@@ -12,7 +12,7 @@ function DemoUser() {
 
     dispatch(sessionActions.login('demo@aa.io','password' ))}
     return(
-        <button className="demo-btn" onClick={handleSubmit} type="submit">Demo User</button>
+        <button className="demo-btn" onClick={handleSubmit} type="submit">Demo</button>
     )
 }
 
