@@ -1,4 +1,8 @@
 .navbar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
     /* overflow: hidden; */
     /* display: flex; */
     /* flex-direction: column; */
@@ -21,13 +25,16 @@
 .logo-name {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .btn-container {
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 2rem;
+    padding-right: 2rem;
 }
 
 

@@ -8,6 +8,7 @@ import CartButtonModal from '../Carts/CartButtonModal';
 import './index.css'
 import SignupFormModal from '../SignupFormModal';
 
+
 function Navigation({ isLoaded }){
     const sessionUser = useSelector(state => state.session.user)
     // const sessionLinks = ()
@@ -15,17 +16,22 @@ function Navigation({ isLoaded }){
     return (
         <header>
         <nav className='navbar-container'>
-          <div className='logo-container'>
+            {/* <div className='logo-container'>
 
-            </div>
+
+            </div> */}
 
             <div className='welcome-container'>{sessionUser ? (`Welcome, ${sessionUser.username}!`): ('Welcome to LuluMelon')}</div>
-            <div className='logo-name'><NavLink className='logo-name' exact to='/'>LuluMelon</NavLink></div>
+            <div className='logo-name'>
+              <NavLink className='logo-name' exact to='/'>
+                LuluMelon
+                {/* <img className='logo-img' src={<i class="fa-solid fa-watermelon-slice"></i>}></img> */}
+              </NavLink></div>
             <div className='navbar-right'>
             <div className='btn-container'>
-              <LoginFormModal />
+              {sessionUser ? null : <LoginFormModal/>}
+              {sessionUser ? null : <SignupFormModal/>}
               <DemoUser />
-              <SignupFormModal />
               <LogoutButton />
               <CartButtonModal />
             </div>

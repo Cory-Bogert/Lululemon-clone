@@ -41,6 +41,7 @@
 
   #cart-modal-content {
     position: absolute;
+
     background-color: white;
     /* background-color:white; */
     display: flex;

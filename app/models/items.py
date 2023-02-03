@@ -38,7 +38,8 @@ class Item(db.Model):
             'size': self.size,
             'stocked': self.stocked,
             'previewImg': self.previewImg,
-            'description': self.description
+            'description': self.description,
+            'carts': [cart.to_dict() for cart in self.carts]
         }
 
     def to_dict_full(self):

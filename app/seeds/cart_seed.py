@@ -10,10 +10,10 @@ def seed_carts():
     cart3 = Cart(
         userId=3, itemId=1, price=5, quantity=1)
 
-    db.session.add(cart1)
-    db.session.add(cart2)
-    db.session.add(cart3)
-    db.session.commit()
+    # db.session.add(cart1)
+    # db.session.add(cart2)
+    # db.session.add(cart3)
+    # db.session.commit()
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

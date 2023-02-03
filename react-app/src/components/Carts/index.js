@@ -6,24 +6,46 @@ import LoginFormModal from "../LoginFormModal";
 import './index.css'
 
 function CartPage() {
-    const { id } = useParams()
+    // const { id } = useParams()
     const dispatch = useDispatch()
+    const currentCart = useSelector(state => state.carts)
+    const cartItems = useSelector(state => state.carts.items)
     const currentUser = useSelector(state => state.session.user)
-    console.log(currentUser, ' this is current user')
+
+
+        useEffect(() => {
+            console.log('is this working')
+
+        }, [currentCart])
+
     useEffect(() => {
         dispatch(fetchAllCarts())
     }, [dispatch])
 
-    const currentCart = useSelector(state => state.carts)
+
+
+
 
     // const carts = Object.values(currentCart)
-    const cartItems = useSelector(state => state.carts.items)
-    console.log(cartItems[0], '3333333333333333333')
-    // console.log(currentUser.id, 'curr user id')
+    console.log(cartItems, ' thiiiiiiiiiiiiiiiiiiiiiiii')
     const currentcartarr = Object.values(currentCart)
+    console.log(currentcartarr, ' 00000000000000')
 
-    const handleDeleteCartItem = (id) => {
-        dispatch(fetchDeleteCart(id))
+
+
+    let subtotalArr = []
+    let subtotal = 0
+    if(currentcartarr){
+        subtotalArr = Object.values(cartItems)
+        console.log(subtotalArr)
+        subtotalArr.forEach(item => {
+            subtotal += parseFloat(item.price)
+        })
+    }
+
+    const handleDeleteCartItem = async(e,id) => {
+        e.preventDefault()
+        await dispatch(fetchDeleteCart(id))
     }
 
     if(!currentUser){
@@ -44,35 +66,43 @@ function CartPage() {
         )
     }
 
-
-
-
     if(!currentCart) return null
     return(
         <>
         <div className="cart-items">
+                        <div className="cart-title">
+                            {<h1>Nice Pick! <i class="fa-solid fa-bag-shopping"></i> {subtotalArr.length} Items</h1>}
+                        </div>
+                            <div className="cart-subtotal">
+                                <h5>${subtotal}</h5>
+                            </div>
             {currentUser && cartItems.length ? (cartItems.map(item => {
+                const cart = item.carts.find(cart => cart.userId === currentUser.id)
+                console.log(cart, 'carrrrrrrrrrrrrrrrrrrrr')
                 return (
                     <div>
-                        <h1>{item.id}</h1>
-                        <p>{item.name}</p>
-                        <p>{item.price}</p>
-                        {/* <p>{quantity}</p> */}
-                        <img src={item.previewImg} width='100px'></img>
-                        <btn onClick={()=>handleDeleteCartItem(item?.id)} className='delete-button'>THIS IS A DELETE BUTTON</btn>
 
+                        <div className="cart-info-container">
+                            <div className="cart-img-container">
+                                <img src={item.previewImg} width='100px'></img>
+                            </div>
+                            <div className="cart-info">
+                                <h1>{item.name}</h1>
+                                <h5>{item.description}</h5>
+                                <h5>{item.price}</h5>
+                                <btn onClick={(e)=>handleDeleteCartItem(e,cart.id)} className='delete-cart-button'>Deleteeeeeee</btn>
+                            </div>
+                            {/* {currentUser && currentcartarr.length ? (currentcartarr.map(cart=>{
+                                return (
+
+                                    <btn onClick={(e)=>handleDeleteCartItem(e,cart?.id)} className='delete-cart-button'>Deleteeeeeee</btn>
+                                    )
+                            })): null} */}
+                        </div>
                     </div>
                 )
             })) : <p>Sorry you need to be logged in to view your cart.</p>}
         </div>
-        {currentUser ? (currentcartarr.map(cart => {
-            return (
-                <div>
-                    <p>{cart.quantity}</p>
-
-                </div>
-            )
-        })): null}
         </>
     )
 }
