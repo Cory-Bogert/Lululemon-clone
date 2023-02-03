@@ -8,5 +8,6 @@ from wtforms.validators import DataRequired, ValidationError
 
 class CartForm(FlaskForm):
     itemId = IntegerField('itemId', validators=[DataRequired()])
+    userId = IntegerField('userId', validators=[DataRequired()])
     price = DecimalField('price', validators=[DataRequired()])
-    quantity = DecimalField('quantity', validators=[DataRequired()])
+    quantity = IntegerField('quantity', validators=[DataRequired()])

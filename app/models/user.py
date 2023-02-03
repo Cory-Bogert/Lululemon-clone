@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     state = db.Column(db.String(20), nullable=False)
     address = db.Column(db.String(255), nullable=False)
 
-    carts = db.relationship('Cart', back_populates='user')
+    # carts = db.relationship('Cart', back_populates='user')
     reviews = db.relationship('Review', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
     purchased_items = db.relationship('PurchasedItem', back_populates='user')
