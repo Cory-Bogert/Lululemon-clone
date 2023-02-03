@@ -39,13 +39,32 @@ def add_item():
         return new_cart.to_dict_full(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+@cart_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def update_item(id):
+    cart = Cart.query.get(id)
+    # currId = current_user.id
+    # item = Item.query.get(id)
+    form = CartForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        # curr_cart = Cart.query.filter(Cart.userId == currId, Cart.itemId == item.id)
+        new_cart = Cart()
+        form.populate_obj(new_cart)
+        db.session.add(new_cart)
+        db.session.commit()
+        return new_cart.to_dict_full(), 201
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 @cart_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_cart(id):
     cart = Cart.query.get(id)
     db.session.delete(cart)
     db.session.commit()
-    return current_user.to_dict(), 200
+    currId =current_user.get_id()
+    return {'Carts':[cart.to_dict_full() for cart in Cart.query.all() if int(cart.userId) == int(currId)]},200
 
 
 

@@ -65,6 +65,7 @@
 .reviewlist-details {
     margin-left: 20px;
     margin-right: 20px;
+    line-break: auto;
 }
 
 .delete-button {
@@ -142,6 +143,7 @@
     /* text-align: center; */
     justify-content: right;
     align-items: center;
+    margin-right: 2rem;
 }
 
 .create-review-btn {

@@ -71,11 +71,7 @@ def edit_review(id):
           'errors': ['The review does not belongs to the current user'],
           'statusCode': 403
         }, 403
-    # print('---------', currId)
-    # print('000000000000', current_review)
     if form.validate_on_submit():
-        # review=Review.query.get(form.data["itemId"])
-        # print(review, 'dddddddddddddddd')
         form.populate_obj(current_review)
         db.session.add(current_review)
         db.session.commit()

@@ -1,4 +1,6 @@
 .navbar-container {
+    display: flex;
+    flex-direction: row;
     /* overflow: hidden; */
     /* display: flex; */
     /* flex-direction: column; */
@@ -21,10 +23,12 @@
 .logo-name {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .btn-container {
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 2rem;
