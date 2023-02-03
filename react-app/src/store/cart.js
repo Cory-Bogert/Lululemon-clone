@@ -26,9 +26,9 @@ const editCart = (cart) => ({
     cart
 })
 
-const deleteCart = (listOfCarts) => ({
+const deleteCart = (ids) => ({
     type: DELETE_CART,
-    listOfCarts
+    ids
 })
 
 //thunks
@@ -95,7 +95,7 @@ export const fetchDeleteCart = (id) => async dispatch => {
     })
     if(response.ok){
         const data = await response.json()
-        dispatch(deleteCart(data.Carts))
+        dispatch(deleteCart(data))
         return response
     }
     if(response.status>=400) throw response
@@ -133,7 +133,8 @@ const cartsReducer = (state = initialState, action) => {
             return newState
 
         case DELETE_CART:
-            newState = {items:action.listOfCarts}
+            newState = {...state, items:state.items.filter(item=> item.id !== action.ids.itemId)}
+            delete newState[action.ids.cartId]
             return newState
 
         default:

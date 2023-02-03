@@ -29,8 +29,8 @@ function Navigation({ isLoaded }){
               </NavLink></div>
             <div className='navbar-right'>
             <div className='btn-container'>
-              <LoginFormModal />
-              <SignupFormModal />
+              {sessionUser ? null : <LoginFormModal/>}
+              {sessionUser ? null : <SignupFormModal/>}
               <DemoUser />
               <LogoutButton />
               <CartButtonModal />

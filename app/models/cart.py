@@ -15,6 +15,7 @@ class Cart(db.Model):
     quantity = db.Column(db.Integer)
 
     # user = db.relationship("User", back_populates='carts')
+
     item = db.relationship('Item', back_populates='carts')
 
     def to_dict(self):
@@ -33,7 +34,7 @@ class Cart(db.Model):
             'itemId': self.itemId,
             'price': str(self.price),
             'quantity': self.quantity,
-            'Item': Item.query.get(self.itemId).to_dict(),
+            'Item': self.item.to_dict(),
             # 'user': self.user.to_dict()
 
         }

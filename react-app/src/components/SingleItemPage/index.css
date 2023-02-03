@@ -21,6 +21,8 @@
 }
 
 .single-item-details {
+    display: flex;
+    flex-direction: column;
     border: solid 10px green;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -167,6 +169,16 @@
     border-radius: 5px;
     width: 10rem;
     height: 3rem;
+    color: white;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+}
+
+.add-cart-button {
+    background-color: black;
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
     color: white;
     font-size: 1.5rem;
     margin-left: 1rem;

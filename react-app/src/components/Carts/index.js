@@ -8,19 +8,29 @@ import './index.css'
 function CartPage() {
     // const { id } = useParams()
     const dispatch = useDispatch()
+    const currentCart = useSelector(state => state.carts)
+    const cartItems = useSelector(state => state.carts.items)
     const currentUser = useSelector(state => state.session.user)
+
+
+        useEffect(() => {
+            console.log('is this working')
+
+        }, [currentCart])
+
     useEffect(() => {
         dispatch(fetchAllCarts())
     }, [dispatch])
 
-    const currentCart = useSelector(state => state.carts)
+
+
 
 
     // const carts = Object.values(currentCart)
-    const cartItems = useSelector(state => state.carts.items)
     console.log(cartItems, ' thiiiiiiiiiiiiiiiiiiiiiiii')
     const currentcartarr = Object.values(currentCart)
     console.log(currentcartarr, ' 00000000000000')
+
 
 
     let subtotalArr = []
@@ -33,13 +43,9 @@ function CartPage() {
         })
     }
 
-
-
-
-
-
-    const handleDeleteCartItem = (id) => {
-        dispatch(fetchDeleteCart(id))
+    const handleDeleteCartItem = async(e,id) => {
+        e.preventDefault()
+        await dispatch(fetchDeleteCart(id))
     }
 
     if(!currentUser){
@@ -71,6 +77,8 @@ function CartPage() {
                                 <h5>${subtotal}</h5>
                             </div>
             {currentUser && cartItems.length ? (cartItems.map(item => {
+                const cart = item.carts.find(cart => cart.userId === currentUser.id)
+                console.log(cart, 'carrrrrrrrrrrrrrrrrrrrr')
                 return (
                     <div>
 
@@ -82,8 +90,14 @@ function CartPage() {
                                 <h1>{item.name}</h1>
                                 <h5>{item.description}</h5>
                                 <h5>{item.price}</h5>
+                                <btn onClick={(e)=>handleDeleteCartItem(e,cart.id)} className='delete-cart-button'>Deleteeeeeee</btn>
                             </div>
-                        <btn onClick={()=>handleDeleteCartItem(item?.id)} className='delete-cart-button'>Delete</btn>
+                            {/* {currentUser && currentcartarr.length ? (currentcartarr.map(cart=>{
+                                return (
+
+                                    <btn onClick={(e)=>handleDeleteCartItem(e,cart?.id)} className='delete-cart-button'>Deleteeeeeee</btn>
+                                    )
+                            })): null} */}
                         </div>
                     </div>
                 )

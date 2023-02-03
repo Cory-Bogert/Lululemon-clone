@@ -57,14 +57,18 @@ def update_item(id):
         return new_cart.to_dict_full(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@cart_routes.route('/<int:id>', methods=['DELETE'])
+@cart_routes.route('/<int:cartId>', methods=['DELETE'])
 @login_required
-def delete_cart(id):
-    cart = Cart.query.get(id)
+def delete_cart(cartId):
+    cart = Cart.query.get(cartId)
+    itemId = cart.itemId
+    print(itemId,'this is item-0000000000000000')
+    # itemId = item.itemId
     db.session.delete(cart)
     db.session.commit()
     currId =current_user.get_id()
-    return {'Carts':[cart.to_dict_full() for cart in Cart.query.all() if int(cart.userId) == int(currId)]},200
+    return {'cartId' : cartId, 'itemId' : itemId}
+    # return {'Carts':[cart.to_dict_full() for cart in Cart.query.all() if int(cart.userId) == int(currId)]},200
 
 
 

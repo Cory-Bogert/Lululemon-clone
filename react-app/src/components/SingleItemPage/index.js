@@ -85,23 +85,10 @@ function SingleItemPage() {
                     </div>
 
                     <div className='single-item-details'>
-                        {sessionUser?.id && !allCartItemsIds.length ? <btn onClick={()=>addItemBtn(item.id, sessionUser.id, item.price)} className='delete-button'>Add</btn> : null}
-
-
-
+                        {sessionUser?.id && !allCartItemsIds.length ? <btn onClick={()=>addItemBtn(item.id, sessionUser.id, item.price)} className='add-cart-button'>Add to Cart</btn> : null}
                         <span>{item.name}</span>
                         <p>{item.description}</p>
                         <p>{item.price}</p>
-                        {/* <p> <ReactStars
-    count={5}
-    onChange={ratingChanged}
-    size={24}
-    isHalf={true}
-    emptyIcon={<i className="far fa-star"></i>}
-    halfIcon={<i className="fa fa-star-half-alt"></i>}
-    fullIcon={<i className="fa fa-star"></i>}
-    activeColor="#ffd700"
-  /></p> */}
                     </div>
 
 
