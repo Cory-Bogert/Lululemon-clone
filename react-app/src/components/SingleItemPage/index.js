@@ -85,10 +85,18 @@ function SingleItemPage() {
                     </div>
 
                     <div className='single-item-details'>
-                        {sessionUser?.id && !allCartItemsIds.length ? <btn onClick={()=>addItemBtn(item.id, sessionUser.id, item.price)} className='add-cart-button'>Add to Cart</btn> : null}
-                        <span>{item.name}</span>
+                        <span className='link-span'>
+                        <Link  to='/'>
+                            {item.category}
+                        </Link>
+                        </span>
+                        <h1>{item.name}</h1>
                         <p>{item.description}</p>
-                        <p>{item.price}</p>
+                        <p>${item.price} USD</p>
+                    </div>
+                    <div className='btn-container'>
+
+                        {sessionUser?.id && !allCartItemsIds.length ? <btn onClick={()=>addItemBtn(item.id, sessionUser.id, item.price)} className='add-cart-button'>Add to Cart</btn> : null}
                     </div>
 
 

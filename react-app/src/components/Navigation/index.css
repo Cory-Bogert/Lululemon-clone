@@ -12,9 +12,10 @@
     top: 0 !important; */
     width: 100%;
     /* border: red 1px solid; */
-    border-bottom: 1px lightgray solid;
+    /* border-bottom: 1px lightgray solid; */
     background: white;
 }
+
 
 .welcome-container {
     display: flex;

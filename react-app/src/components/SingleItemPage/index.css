@@ -5,14 +5,14 @@
 .wrapper-container {
     display: flex;
     flex-direction: row;
-    border: solid 2px blue;
+    /* border: solid 2px blue; */
     margin-left: 2rem;
     margin-right: 2rem;
     max-height: 40rem;
 }
 
 .single-img-container {
-    border:solid 2px red;
+    /* border:solid 2px red; */
     padding-left: 1rem;
     padding-right: 1rem;
     /* max-height: 20rem; */
@@ -23,7 +23,7 @@
 .single-item-details {
     display: flex;
     flex-direction: column;
-    border: solid 10px green;
+    /* border: solid 10px green; */
     padding-left: 1rem;
     padding-right: 1rem;
     width: 70%;
@@ -78,6 +78,13 @@
     color: white;
     font-size: 1.5rem;
     padding-right: 1rem;
+    text-decoration: none;
+}
+
+.delete-button:hover {
+    background-color: grey;
+    text-decoration: none;
+    border: none;
 }
 
 .buttons i{
@@ -155,6 +162,13 @@
     height: 5rem;
     color: white;
     font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.create-review-btn:hover{
+    background-color: grey;
+    text-decoration: none;
+    border: none;
 }
 
 .edit-review {
@@ -172,14 +186,39 @@
     color: white;
     font-size: 1.5rem;
     margin-left: 1rem;
+    text-decoration: none;
+}
+
+.edit-review-btn:hover {
+    background-color: grey;
+    text-decoration: none;
+    border: none;
 }
 
 .add-cart-button {
+    display: flex;
+    /* justify-content: flex-end; */
+    /* align-items: right; */
     background-color: black;
     border-radius: 5px;
-    width: fit-content;
+    width: 8rem;
     height: fit-content;
     color: white;
     font-size: 1.5rem;
     margin-left: 1rem;
+    cursor: pointer;
+    text-align: center;
 }
+
+.add-cart-button:hover {
+    background-color: grey;
+}
+
+
+
+.single-item-details> span> a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
