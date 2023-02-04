@@ -23,10 +23,11 @@
     align-items: center;
 }
 
-.logo-name {
+.logo-name-logo {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
 }
 
 .btn-container {

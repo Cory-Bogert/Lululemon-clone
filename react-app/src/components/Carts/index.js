@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { fetchAllCarts, fetchCreateCart, fetchDeleteCart } from "../../store/cart";
-import LoginFormModal from "../LoginFormModal";
+import Dropdown from "./EditDropdown";
 import './index.css'
 
 function CartPage() {
@@ -22,16 +22,10 @@ function CartPage() {
         dispatch(fetchAllCarts())
     }, [dispatch])
 
-
-
-
-
     // const carts = Object.values(currentCart)
-    console.log(cartItems, ' thiiiiiiiiiiiiiiiiiiiiiiii')
+    // console.log(cartItems, ' thiiiiiiiiiiiiiiiiiiiiiiii')
     const currentcartarr = Object.values(currentCart)
-    console.log(currentcartarr, ' 00000000000000')
-
-
+    // console.log(currentcartarr, ' 00000000000000')
 
     let subtotalArr = []
     let subtotal = 0
@@ -39,7 +33,8 @@ function CartPage() {
         subtotalArr = Object.values(cartItems)
         console.log(subtotalArr)
         subtotalArr.forEach(item => {
-            subtotal += parseFloat(item.price)
+            const cart = item.carts.find(cart => cart.userId === currentUser.id)
+            subtotal += parseFloat(item.price) * parseInt(cart.quantity)
         })
     }
 
@@ -48,11 +43,12 @@ function CartPage() {
         await dispatch(fetchDeleteCart(id))
     }
 
+
+
     if(!currentUser){
         return (
             <>
                 <p>You need to be logged in to add items to your cart</p>
-                {/* <NavLink to='/'>Sign in here</NavLink> */}
             </>
         )
     }
@@ -74,11 +70,11 @@ function CartPage() {
                             {<h1>Nice Pick! <i class="fa-solid fa-bag-shopping"></i> {subtotalArr.length} Items</h1>}
                         </div>
                             <div className="cart-subtotal">
-                                <h5>${subtotal}</h5>
+                                <h5>Subtotal ${subtotal}</h5>
                             </div>
             {currentUser && cartItems.length ? (cartItems.map(item => {
                 const cart = item.carts.find(cart => cart.userId === currentUser.id)
-                console.log(cart, 'carrrrrrrrrrrrrrrrrrrrr')
+                console.log(cart)
                 return (
                     <div>
 
@@ -87,10 +83,16 @@ function CartPage() {
                                 <img src={item.previewImg} width='100px'></img>
                             </div>
                             <div className="cart-info">
-                                <h1>{item.name}</h1>
-                                <h5>{item.description}</h5>
-                                <h5>{item.price}</h5>
+                                <h1 className="item-name">{item.name}</h1>
+                                <h5 className="item-description">{item.description}</h5>
+                                <div className="item-dropdown">
+                                <h5 className='item-quantity'>{cart.quantity}</h5>
+                                    <Dropdown placeHolder={cart.quantity}/>
+                                </div>
+                                <h5 className="item-price">${item.price} USD</h5>
+                                <div className="btn-div">
                                 <btn onClick={(e)=>handleDeleteCartItem(e,cart.id)} className='delete-cart-button'>Delete</btn>
+                                </div>
                             </div>
                             {/* {currentUser && currentcartarr.length ? (currentcartarr.map(cart=>{
                                 return (

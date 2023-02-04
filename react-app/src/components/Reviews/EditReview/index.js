@@ -9,10 +9,17 @@ import { fetchUpdateReview, getAllReviews } from '../../../store/review';
 const EditFormReview = ({review}) => {
     const dispatch = useDispatch()
     // const { closeModal } = useModal()
+    const currentUser = useSelector(state => state.session.user)
+    // console.log(currentUser, 'current user------------------------------')
 
-    const [title, setTitle] = useState('')
-    const [rating, setRating] = useState(0)
-    const [description, setDescription] = useState('')
+    const allReviews = useSelector(state => Object.values(state.reviews))
+    // console.log(allReviews, ' this is all the reviews ')
+    let currReview = allReviews.find(review => review.userId == currentUser.id)
+    // console.log(currReview, 'THIS IS THE CURRENT USERS REVIEWS')
+
+    const [title, setTitle] = useState(currReview.title)
+    const [rating, setRating] = useState(currReview.rating)
+    const [description, setDescription] = useState(currReview.description)
     const [validationErrors, setValidationErrors] = useState([])
 
     const updateTitle = (e) => setTitle(e.target.value)
@@ -22,6 +29,7 @@ const EditFormReview = ({review}) => {
     useEffect(() => {
         const errors = []
         if(title.length > 40){errors.push('Please provide a title with less than 40 characters')}
+        if(!title.length){errors.push('Please provide a title')}
         if(!description.length){errors.push('Please provide a Review to update')}
         if(description.length > 255){errors.push('Please provide a description with less than 255 characters')}
         if(rating < 1 || rating > 5){errors.push('Rating must be between 1 and 5')}
