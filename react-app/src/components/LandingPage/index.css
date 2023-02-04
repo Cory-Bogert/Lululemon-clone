@@ -43,7 +43,7 @@
 .main-img {
 
     z-index: -1;
-    width: 70%;
+    width: 50%;
 }
 
 
@@ -82,10 +82,64 @@
   }
 
 .items-container {
-    border: solid 1px blue;
+    /* border: solid 1px blue; */
     display: flex;
     justify-content: space-between;
     margin: 2rem;
     padding-top: 20px;
-    width: 70%;
+    width: 50%;
+}
+
+.itemlist-links {
+  text-decoration: none;
+  color: black;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+.carousel.carousel-slider {
+  overflow: inherit;
+}
+
+.carousel .control-next.control-arrow, .carousel .control-next.control-arrow:hover{
+  background-color: transparent;
+  right: -146px;
+}
+
+.carousel .control-prev.control-arrow, .carousel .control-prev.control-arrow:hover {
+  background-color: transparent;
+  left: -146px;
+}
+
+.carousel .control-arrow, .carousel.carousel-slider .control-arrow{
+  opacity: 1;
+}
+
+.carousel .control-next.control-arrow:before {
+  content: '';
+  border: solid rgb(211,19,52);
+  border-width: 0 8px 8px 0;
+  display: inline-block;
+  padding: 14px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.carousel .control-prev.control-arrow:before {
+  content: '';
+  border: solid rgb(211,19,52);
+  border-width: 0 8px 8px 0;
+  display: inline-block;
+  padding: 14px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 }

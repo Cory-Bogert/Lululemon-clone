@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LoginFormModal from '../LoginFormModal';
 import DemoUser from '../Demo';
@@ -7,6 +7,7 @@ import LogoutButton from '../auth/LogoutButton';
 import CartButtonModal from '../Carts/CartButtonModal';
 import './index.css'
 import SignupFormModal from '../SignupFormModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ProfileButton from './ProfileButton';
 
 
@@ -24,10 +25,11 @@ function Navigation({ isLoaded }){
 
             <div className='welcome-container'>{sessionUser ? (`Welcome, ${sessionUser.username}!`): ('Welcome to LuluMelon')}</div>
             <div className='logo-name'>
-              <NavLink className='logo-name' exact to='/'>
-                LuluMelon
+              <a className='logo-name' href='/' class="fa-solid fa-watermelon-slice">LuluMelon
+              <FontAwesomeIcon icon="fa-light fa-watermelon-slice" size='2x'/>
+                {/* LuluMelon{"fa-solid fa-watermelon-slice"} */}
                 {/* <img className='logo-img' src={<i class="fa-solid fa-watermelon-slice"></i>}></img> */}
-              </NavLink></div>
+              </a></div>
             <div className='navbar-right'>
             <div className='btn-container'>
               {sessionUser ? <LogoutButton/> : <LoginFormModal/>}

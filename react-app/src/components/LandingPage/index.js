@@ -4,6 +4,8 @@ import { Link, NavLink } from 'react-router-dom'
 import { fetchAllItems } from '../../store/item';
 import { useEffect } from 'react';
 import { getAllReviews } from '../../store/review';
+import { Carousel } from 'react-responsive-carousel'
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './index.css'
 
 function Landing() {
@@ -51,22 +53,22 @@ function Landing() {
 
         </div>
         <div className='items-container'>
+            <Carousel infiniteLoop stopOnHover autoPlay showIndicators={false}>
             {items.map(item =>(
                 <div className='item-box'>
-
-
                     <div className='single-item-deets'>
+
+                    <img src={item.previewImg} alt='preview of item' width='200px'/>
                     <NavLink to={`/items/${item.id}`} className='itemlist-links'>
                     {/* <p>{item.id} ddddd</p> */}
 
-                    <img src={item.previewImg} alt='preview of item' width='200px'/>
                     <h4>{item.name}</h4>
                     <h4>{item.price}</h4>
                     </NavLink>
                     </div>
                 </div>
-
-            ))}
+))}
+                </Carousel>
         </div>
     </div>
     )

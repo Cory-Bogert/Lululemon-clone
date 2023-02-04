@@ -90,7 +90,7 @@ function CartPage() {
                                 <h1>{item.name}</h1>
                                 <h5>{item.description}</h5>
                                 <h5>{item.price}</h5>
-                                <btn onClick={(e)=>handleDeleteCartItem(e,cart.id)} className='delete-cart-button'>Deleteeeeeee</btn>
+                                <btn onClick={(e)=>handleDeleteCartItem(e,cart.id)} className='delete-cart-button'>Delete</btn>
                             </div>
                             {/* {currentUser && currentcartarr.length ? (currentcartarr.map(cart=>{
                                 return (
