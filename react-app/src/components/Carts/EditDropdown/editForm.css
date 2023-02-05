@@ -1,0 +1,31 @@
+.edit-cart-submit-btn {
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: right; */
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.edit-cart-submit-btn:hover {
+    background-color: grey;
+    text-decoration: none;
+    border:none;
+    color:white
+}
+
+form {
+    padding: none
+}
+
+input {
+    width: 1.8rem;
+    margin-bottom: 3px;
+    /* border: red; */
+}

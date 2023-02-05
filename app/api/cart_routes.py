@@ -39,22 +39,19 @@ def add_item():
         return new_cart.to_dict_full(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@cart_routes.route('/<int:id>', methods=['PUT'])
+@cart_routes.route('/<int:cartId>', methods=['PUT'])
 @login_required
-def update_item(id):
-    cart = Cart.query.get(id)
-    # currId = current_user.id
-    # item = Item.query.get(id)
+def update_item(cartId):
+    cart = Cart.query.get(cartId)
+    itemId = cart.itemId
+    # print(cart, 'this is the cart--------', itemId, 'this is the item id----------')
     form = CartForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        # curr_cart = Cart.query.filter(Cart.userId == currId, Cart.itemId == item.id)
-        new_cart = Cart()
-        form.populate_obj(new_cart)
-        db.session.add(new_cart)
+        cart.quantity = form.data['quantity']
         db.session.commit()
-        return new_cart.to_dict_full(), 201
+        return cart.to_dict_full(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @cart_routes.route('/<int:cartId>', methods=['DELETE'])
@@ -68,38 +65,3 @@ def delete_cart(cartId):
     db.session.commit()
     currId =current_user.get_id()
     return {'cartId' : cartId, 'itemId' : itemId}
-    # return {'Carts':[cart.to_dict_full() for cart in Cart.query.all() if int(cart.userId) == int(currId)]},200
-
-
-
-
-
-
-
-
-
-
-        # print('====================')
-        # curr_cart = Cart.query.filter(Cart.userId==currId, Cart.itemId==item.id).first()
-        # print(curr_cart, '-***************-')
-        # if curr_cart and not form:
-        #     print('77777777777777777')
-        #     curr_cart.quantity += 1
-        #     db.session.commit()
-        #     return curr_cart.to_dict()
-        # elif curr_cart:
-        #     print('8888888888888')
-        #     curr_cart.quantity = form.data['quantity']
-        #     print('4444444444444444444')
-        #     db.session.commit()
-        #     return curr_cart.to_dict_full()
-        # else:
-        #     print('99999999999999999999999999')
-        #     new_cart = Cart(
-        #         item_id=item.id,
-        #         quantity=form.data['quantity'],
-        #         user_id=currId
-        #     )
-        #     db.session.add(new_cart)
-        #     db.session.commit()
-        #     return new_cart.to_dict()

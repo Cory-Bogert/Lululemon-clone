@@ -25,7 +25,7 @@ function Navigation({ isLoaded }){
 
             <div className='welcome-container'>{sessionUser ? (`Welcome, ${sessionUser.username}!`): ('Welcome to LuluMelon')}</div>
             <div className='logo-name'>
-              <a className='logo-name' href='/' class="fa-solid fa-watermelon-slice">LuluMelon
+              <a className='logo-name-logo' href='/' class="fa-solid fa-watermelon-slice">LuluMelon
               <FontAwesomeIcon icon="fa-light fa-watermelon-slice" size='2x'/>
                 {/* LuluMelon{"fa-solid fa-watermelon-slice"} */}
                 {/* <img className='logo-img' src={<i class="fa-solid fa-watermelon-slice"></i>}></img> */}

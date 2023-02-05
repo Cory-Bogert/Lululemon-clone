@@ -64,7 +64,7 @@ function SingleItemPage() {
             quantity: 1
         }
         if(allCartItemsIds.length){
-            console.log('THIS IS WORKING')
+            // console.log('THIS IS WORKING')
         }
         dispatch(fetchCreateCart(payload))
     }
@@ -123,7 +123,6 @@ function SingleItemPage() {
                 <div className='create-review-btn-top'>
 
                 {!userReviewsExist.length ? <CreateReviewModal itemId={id}/> :  <p>You have already left a review for this item</p>}
-                        {/* <CreateReviewModal itemId={id} /> */}
 
                 </div>
             </div>
@@ -144,7 +143,6 @@ function SingleItemPage() {
 
                 {sessionUser?.id === userId ?(
                   <div className='edit-review'>
-                    {/* <EditFormReview review={{id, itemId, description, rating, userId}} /> */}
                     <button onClick={()=>handleDeleteReview(id)} className='delete-button'>Delete</button>
                     <EditReviewModal review={{id, itemId, title, description, rating, userId}} />
                 </div> ): null}

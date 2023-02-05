@@ -1,0 +1,29 @@
+.dropdown-container {
+    text-align: left;
+    border: 1px solid #ccc;
+    position: relative;
+    border-radius: 5px;
+  }
+
+  .dropdown-input {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+
+  .edit-cart-button {
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: right; */
+    background-color: black;
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    /* padding-right: 1rem; */
+}
