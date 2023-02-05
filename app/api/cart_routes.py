@@ -65,38 +65,3 @@ def delete_cart(cartId):
     db.session.commit()
     currId =current_user.get_id()
     return {'cartId' : cartId, 'itemId' : itemId}
-
-
-
-
-
-
-
-
-
-
-
-        # print('====================')
-        # curr_cart = Cart.query.filter(Cart.userId==currId, Cart.itemId==item.id).first()
-        # print(curr_cart, '-***************-')
-        # if curr_cart and not form:
-        #     print('77777777777777777')
-        #     curr_cart.quantity += 1
-        #     db.session.commit()
-        #     return curr_cart.to_dict()
-        # elif curr_cart:
-        #     print('8888888888888')
-        #     curr_cart.quantity = form.data['quantity']
-        #     print('4444444444444444444')
-        #     db.session.commit()
-        #     return curr_cart.to_dict_full()
-        # else:
-        #     print('99999999999999999999999999')
-        #     new_cart = Cart(
-        #         item_id=item.id,
-        #         quantity=form.data['quantity'],
-        #         user_id=currId
-        #     )
-        #     db.session.add(new_cart)
-        #     db.session.commit()
-        #     return new_cart.to_dict()

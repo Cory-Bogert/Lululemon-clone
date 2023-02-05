@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { fetchAllCarts, fetchCreateCart, fetchDeleteCart } from "../../store/cart";
 import Dropdown from "./EditDropdown";
+import EditFormCart from "./EditDropdown/EditForm";
 import './index.css'
 
 function CartPage() {
@@ -14,7 +15,7 @@ function CartPage() {
 
 
         useEffect(() => {
-            console.log('is this working')
+
 
         }, [currentCart])
 
@@ -22,10 +23,8 @@ function CartPage() {
         dispatch(fetchAllCarts())
     }, [dispatch])
 
-    // const carts = Object.values(currentCart)
-    // console.log(cartItems, ' thiiiiiiiiiiiiiiiiiiiiiiii')
     const currentcartarr = Object.values(currentCart)
-    // console.log(currentcartarr, ' 00000000000000')
+
 
     let subtotalArr = []
     let subtotal = 0
@@ -42,6 +41,7 @@ function CartPage() {
         e.preventDefault()
         await dispatch(fetchDeleteCart(id))
     }
+
 
 
 
@@ -74,7 +74,6 @@ function CartPage() {
                             </div>
             {currentUser && cartItems.length ? (cartItems.map(item => {
                 const cart = item.carts.find(cart => cart.userId === currentUser.id)
-                console.log(cart)
                 return (
                     <div>
 
@@ -86,20 +85,16 @@ function CartPage() {
                                 <h1 className="item-name">{item.name}</h1>
                                 <h5 className="item-description">{item.description}</h5>
                                 <div className="item-dropdown">
-                                <h5 className='item-quantity'>{cart.quantity}</h5>
-                                    <Dropdown placeHolder={cart.quantity}/>
+                                    <h5 className='item-quantity'>Quantity</h5>
+                        {currentUser?.id === cart.userId ? <EditFormCart cartId={cart.id}/> : null}
+
+
                                 </div>
                                 <h5 className="item-price">${item.price} USD</h5>
                                 <div className="btn-div">
                                 <btn onClick={(e)=>handleDeleteCartItem(e,cart.id)} className='delete-cart-button'>Delete</btn>
                                 </div>
                             </div>
-                            {/* {currentUser && currentcartarr.length ? (currentcartarr.map(cart=>{
-                                return (
-
-                                    <btn onClick={(e)=>handleDeleteCartItem(e,cart?.id)} className='delete-cart-button'>Deleteeeeeee</btn>
-                                    )
-                            })): null} */}
                         </div>
                     </div>
                 )

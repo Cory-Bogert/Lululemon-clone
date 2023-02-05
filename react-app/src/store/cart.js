@@ -40,23 +40,6 @@ export const fetchAllCarts = () => async dispatch => {
     }
 }
 
-// export const fetchCart = () => async dispatch => {
-//     const response = await fetch(`/api/carts/current`)
-//     if(response.ok){
-//         const cartList = await response.json()
-//         dispatch(getCart(cartList))
-//     }
-
-// }
-
-// export const fetchItemReviews = (itemId) => async dispatch => {
-//     const response = await fetch(`/api/items/${itemId}/reviews`)
-//     if(response.ok){
-//         const reviewList = await response.json()
-//         dispatch(getItemReviews(reviewList))
-//     }
-// }
-
 export const fetchCreateCart = (cart) => async dispatch => {
     const response = await fetch(`/api/carts/add`, {
         method: 'POST',
@@ -108,17 +91,11 @@ const cartsReducer = (state = initialState, action) => {
     let newState = {items:[]};
     switch(action.type){
         case READ_CARTS:
-            // newState={...state}
             action.Carts.forEach((cart) => {
                 newState[cart.id] = cart;
                 newState.items.push(cart.Item)
             })
             return newState
-
-        // case READ_CART:
-        //     newState={...state}
-        //     newState[action.cart.id] = action.cart
-        //     return newState
 
         case CREATE_CART:
             newState = {...state, items:[...state.items]}
