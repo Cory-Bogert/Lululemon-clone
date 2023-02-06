@@ -26,12 +26,14 @@
 
 .single-cart-item {
     border-bottom: solid 1px lightgrey;
+    width: 40rem;
 
 }
 
 .cart-info {
     display: flex;
     flex-direction: column;
+    width: 40rem;
     /* justify-content: center; */
     /* align-items: left; */
 
@@ -53,6 +55,8 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    overflow-wrap: break-word;
+    /* text-overflow: ellipsis; */
 }
 
 .item-price {
