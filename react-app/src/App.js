@@ -55,9 +55,9 @@ function App() {
         <Route path='/' exact={true}>
           <Landing />
         </Route>
-        {/* <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
-        </Route> */}
+        <Route>
+          <h1>404 Error</h1>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

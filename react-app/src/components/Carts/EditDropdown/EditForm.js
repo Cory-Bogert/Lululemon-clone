@@ -45,7 +45,7 @@ const EditFormCart = ({cartId}) => {
                 </div>
                 <form onSubmit={handleSubmit} >
                     <input
-                    className="input"
+                    className="edit-cart-input"
                     placeholder="Quantity"
                     id="quantity"
                     type="number"

@@ -68,6 +68,20 @@
     margin-left: 20px;
     margin-right: 20px;
     line-break: auto;
+    word-wrap: break-word;
+}
+
+.item-price-deets {
+    display: flex;
+    justify-content: flex-end;
+
+    /* align-content: center; */
+}
+
+.item-description-deets {
+    display: flex;
+    word-wrap: break-word;
+    height: 26rem;
 }
 
 .delete-button {
@@ -103,6 +117,8 @@
     align-items: center;
     justify-content: space-around;
     padding-left: 50px;
+    /* margin-bottom: 2rem; */
+    padding-bottom: 2rem;
 
     /* width: 80%; */
 }

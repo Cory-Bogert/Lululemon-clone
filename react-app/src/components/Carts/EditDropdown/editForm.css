@@ -24,7 +24,7 @@ form {
     padding: none
 }
 
-input {
+.edit-cart-input {
     width: 1.8rem;
     margin-bottom: 3px;
     /* border: red; */

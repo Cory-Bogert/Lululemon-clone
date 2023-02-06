@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { fetchOneItem } from '../../../store/item';
 import { useModal } from '../../../context/Modal';
 import { fetchUpdateReview, getAllReviews } from '../../../store/review';
+import './index.css'
 
 
 const EditFormReview = ({review}) => {
@@ -59,28 +60,33 @@ const EditFormReview = ({review}) => {
         {validationErrors.length > 0 && validationErrors.map((error) => <div className="errors-container" key={error}>{error}</div>)}
     </div>
         <form onSubmit={handleSubmit}>
-
+        <label htmlFor='title'>Title</label>
             <input
             className='input'
             placeholder="Title"
+            name="title"
             id="title"
             type="text"
             required
             value={title}
             onChange={updateTitle} />
 
+            <label htmlFor='description'>Description</label>
             <input
             className='input'
+            name='description'
             placeholder="Description"
             id="description"
             type="text"
             required
             value={description}
             onChange={updateDescription} />
-
+            
+            <label htmlFor='rating'>Rating</label>
             <input
             className='input'
             placeholder="Leave a rating"
+            name='rating'
             id="rating"
             type="number"
             required

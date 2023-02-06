@@ -1,9 +1,17 @@
 .demo-btn{
-    width: 66px;
-    height: 20px;
-    /* background-color: #ff383c; */
-    /* border:none; */
-    /* border-radius: 8px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    width: 70px;
+    height: 25px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    margin: 2px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 

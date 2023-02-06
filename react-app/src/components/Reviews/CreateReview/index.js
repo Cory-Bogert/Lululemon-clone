@@ -48,18 +48,22 @@ const CreateReview = ({ closeModal }) => {
             </div>
             <form onSubmit={handleSubmit}>
 
+                <label htmlFor='title'>Title</label>
                 <input
                 className='input'
                 placeholder="Title"
+                name="title"
                 id="title"
                 type="text"
                 required
                 value={title}
                 onChange={e => setTitle(e.target.value)} />
 
+                <label htmlFor='description'>Description</label>
                 <input
                 placeholder="Leave a review"
                 className="input"
+                name="description"
                 required
                 id='description'
                 type="text"
@@ -67,10 +71,11 @@ const CreateReview = ({ closeModal }) => {
                 onChange={e => setDescription(e.target.value)}
             />
 
-
+            <label htmlFor='rating'>Rating</label>
             <input
                 placeholder="Leave a rating"
                 className="input"
+                name="rating"
                 required
                 id='rating'
                 type="number"

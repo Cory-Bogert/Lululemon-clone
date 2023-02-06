@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
-import DemoUser from '../Demo'
+import './index.css'
+
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -57,7 +58,7 @@ const LoginForm = () => {
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
+        <button className='login-btn' type='submit'>Login</button>
       </div>
     </form>
   );
