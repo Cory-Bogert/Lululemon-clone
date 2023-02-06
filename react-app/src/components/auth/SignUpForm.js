@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -15,8 +15,29 @@ const SignUpForm = () => {
   const [city, setCity] = useState('')
   const [state, setState] = useState('')
   const [address, setAddress] = useState('')
+  const [validationErrors, setValidationErrors] = useState([])
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const errors = []
+    if(!username.length){errors.push('Username field needs to be filled out')}
+    if(username.length > 20){errors.push('Username needs to be less than 20 characters')}
+    if(!email.length){errors.push('email needs to be filled out')}
+    if(email.length > 40){errors.push('email needs to be less than 40 characters')}
+    if(firstName.length > 40){errors.push('First name needs to be less than 40 characters')}
+    if(!firstName.length){errors.push('First name field needs to be filled out')}
+    if(!lastName.length){errors.push('Last name field needs to be filled out')}
+    if(lastName.length > 40){errors.push('Last name needs to be less than 40 characters')}
+    if(!city.length){errors.push('City field needs to be filled out')}
+    if(city.length > 20){errors.push('City field needs to be less than 20 characters')}
+    if(!state.length){errors.push('State field needs to be filled out')}
+    if(state.length > 20){errors.push('State Field needs to be less than 20 characters')}
+    if(!address.length){errors.push('Address field needs to be filled out')}
+    if(address.length > 100){errors.push('Address field needs to be less than 100 characters')}
+    setValidationErrors(errors)
+  }, [username, email, firstName, lastName, city, state, address])
+
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -69,11 +90,15 @@ const SignUpForm = () => {
   }
 
   return (
+    <>
+    <div>
+                    {validationErrors.length > 0 && validationErrors.map((error) => <div className="errors-container" key={error}>{error}</div>)}
+                </div>
     <form onSubmit={onSignUp}>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
-        ))}
+          ))}
       </div>
       <div>
         <label>User Name</label>
@@ -82,7 +107,7 @@ const SignUpForm = () => {
           name='username'
           onChange={updateUsername}
           value={username}
-        ></input>
+          ></input>
       </div>
       <div>
         <label>Email</label>
@@ -91,7 +116,7 @@ const SignUpForm = () => {
           name='email'
           onChange={updateEmail}
           value={email}
-        ></input>
+          ></input>
       </div>
       <div>
         <label>Password</label>
@@ -100,7 +125,7 @@ const SignUpForm = () => {
           name='password'
           onChange={updatePassword}
           value={password}
-        ></input>
+          ></input>
       </div>
       <div>
         <label>Repeat Password</label>
@@ -110,7 +135,7 @@ const SignUpForm = () => {
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
-        ></input>
+          ></input>
       </div>
       <div>
         <label>First Name</label>
@@ -119,7 +144,7 @@ const SignUpForm = () => {
           name='firstName'
           onChange={updateFirstName}
           value={firstName}
-        ></input>
+          ></input>
       </div>
       <div>
         <label>Last Name</label>
@@ -128,7 +153,7 @@ const SignUpForm = () => {
           name='lastName'
           onChange={updateLastName}
           value={lastName}
-        ></input>
+          ></input>
       </div>
       <div>
         <label>City</label>
@@ -137,7 +162,7 @@ const SignUpForm = () => {
           name='city'
           onChange={updateCity}
           value={city}
-        ></input>
+          ></input>
       </div>
       <div>
         <label>State</label>
@@ -146,7 +171,7 @@ const SignUpForm = () => {
           name='state'
           onChange={updateState}
           value={state}
-        ></input>
+          ></input>
       </div>
       <div>
         <label>Address</label>
@@ -155,10 +180,11 @@ const SignUpForm = () => {
           name='address'
           onChange={updateAddress}
           value={address}
-        ></input>
+          ></input>
       </div>
       <button type='submit' className='signup-btn'>Sign Up</button>
     </form>
+          </>
   );
 };
 
