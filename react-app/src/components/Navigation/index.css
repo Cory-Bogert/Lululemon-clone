@@ -23,11 +23,12 @@
     align-items: center;
 }
 
-.logo-name-logo {
+.logo-name{
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    color: black
 }
 
 .btn-container {
@@ -41,7 +42,7 @@
 
 
 button:hover {
-    text-decoration: underline;
-    color: black;
+    text-decoration: none;
+    background-color: grey;
     cursor: pointer;
   }

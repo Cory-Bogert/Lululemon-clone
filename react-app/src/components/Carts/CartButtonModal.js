@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import { Modal } from '../../context/Modal';
 import { CartModal } from '../../context/CartModal';
 import CartPage from '.';
-// import './index.css'
+import './index.css'
 // import './createReview.css'
 function CartButtonModal() {
     const [showModal, setShowModal] = useState(false)

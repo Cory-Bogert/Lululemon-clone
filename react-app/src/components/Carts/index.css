@@ -21,6 +21,12 @@
 .cart-items {
     display: flex;
     flex-direction: column;
+
+}
+
+.single-cart-item {
+    border-bottom: solid 1px lightgrey;
+
 }
 
 .cart-info {
@@ -86,6 +92,7 @@
     cursor: pointer;
     text-align: center;
     margin-right: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     /* padding-right: 1rem; */
 }
 
@@ -102,4 +109,20 @@
     padding: none;
     margin: none
     /* align-items: center; */
+}
+
+.cart-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: black;
+    border-radius: 5px;
+    width: 70px;
+    height: 25px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

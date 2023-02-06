@@ -70,7 +70,6 @@ function SingleItemPage() {
     }
 
 
-
     const handleDeleteReview = (id) => {
         dispatch(fetchDeleteReview(id))
     }
@@ -91,8 +90,8 @@ function SingleItemPage() {
                         </Link>
                         </span>
                         <h1>{item.name}</h1>
-                        <p>{item.description}</p>
-                        <p>${item.price} USD</p>
+                        <p className='item-description-deets'>{item.description}</p>
+                        <p className='item-price-deets'>${item.price} USD</p>
                     </div>
                     <div className='btn-container'>
 
@@ -128,9 +127,9 @@ function SingleItemPage() {
             </div>
             {reviews.length ? (reviews.map(({id, itemId, title, description, rating, userId})  =>(
 
-            <div key={id} className='reviewbox'>
+                <div key={id} className='reviewbox'>
             <div className='reviewlist'>
-                <h1>{userId}UserName</h1>
+                {/* <h1>{userId}UserName</h1> */}
                 <h2>{title}</h2>
                 {/* <h3 className='reviewlist-details'>{rating}★</h3> */}
                 {rating === 1 && <h3><i class="fa-solid fa-star"></i></h3>}

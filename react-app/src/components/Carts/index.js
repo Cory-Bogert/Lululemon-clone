@@ -32,7 +32,7 @@ function CartPage() {
         subtotalArr = Object.values(cartItems)
         console.log(subtotalArr)
         subtotalArr.forEach(item => {
-            const cart = item.carts.find(cart => cart.userId === currentUser.id)
+            const cart = item.carts.find(cart => cart?.userId === currentUser?.id)
             subtotal += parseFloat(item.price) * parseInt(cart.quantity)
         })
     }
@@ -70,16 +70,19 @@ function CartPage() {
                             {<h1>Nice Pick! <i class="fa-solid fa-bag-shopping"></i> {subtotalArr.length} Items</h1>}
                         </div>
                             <div className="cart-subtotal">
-                                <h5>Subtotal ${subtotal}</h5>
+                                <h5>Subtotal ${subtotal.toFixed(2)}</h5>
                             </div>
             {currentUser && cartItems.length ? (cartItems.map(item => {
                 const cart = item.carts.find(cart => cart.userId === currentUser.id)
                 return (
-                    <div>
+                    <div className='single-cart-item'>
 
                         <div className="cart-info-container">
                             <div className="cart-img-container">
+                                <NavLink to={`/items/${item.id}`}>
+
                                 <img src={item.previewImg} width='100px'></img>
+                                </NavLink>
                             </div>
                             <div className="cart-info">
                                 <h1 className="item-name">{item.name}</h1>

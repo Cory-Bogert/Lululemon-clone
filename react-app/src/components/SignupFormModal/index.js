@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Modal } from '../../context/Modal'
 import SignUpForm from '../auth/SignUpForm'
+import './index.css'
 // import DemoUser from '../Demo'
 
 function SignupFormModal() {
@@ -8,7 +9,7 @@ function SignupFormModal() {
 
     return (
         <>
-        <button className='signup-btn' onClick={() => setShowModal(true)}>Signup Modal</button>
+        <button className='signup-btn' onClick={() => setShowModal(true)}>Signup</button>
         {showModal && (
             <Modal onClose={() => setShowModal(false)}>
                 <SignUpForm />
