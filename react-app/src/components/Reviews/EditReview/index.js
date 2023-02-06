@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { fetchOneItem } from '../../../store/item';
 import { useModal } from '../../../context/Modal';
+import { Modal } from '../../../context/Modal';
 import { fetchUpdateReview, getAllReviews } from '../../../store/review';
 import './index.css'
 
 
-const EditFormReview = ({review}) => {
+const EditFormReview = ({review, closeModal}) => {
     const dispatch = useDispatch()
     // const { closeModal } = useModal()
     const currentUser = useSelector(state => state.session.user)
@@ -49,8 +50,7 @@ const EditFormReview = ({review}) => {
         }
 
         await dispatch(fetchUpdateReview(updateReview))
-        // closeModal()
-        // await dispatch(fetchOneItem(id))
+        closeModal()
     }
 
     return (
@@ -81,7 +81,7 @@ const EditFormReview = ({review}) => {
             required
             value={description}
             onChange={updateDescription} />
-            
+
             <label htmlFor='rating'>Rating</label>
             <input
             className='input'
