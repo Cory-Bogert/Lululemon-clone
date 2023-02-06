@@ -6,8 +6,9 @@ import Dropdown from "./EditDropdown";
 import EditFormCart from "./EditDropdown/EditForm";
 import './index.css'
 
-function CartPage() {
+function CartPage({closeModal}) {
     // const { id } = useParams()
+    const history = useHistory()
     const dispatch = useDispatch()
     const currentCart = useSelector(state => state.carts)
     const cartItems = useSelector(state => state.carts.items)
@@ -42,6 +43,12 @@ function CartPage() {
         await dispatch(fetchDeleteCart(id))
     }
 
+    const handleRedirectCart = async(e) => {
+        e.preventDefault()
+        history.push('/')
+        closeModal()
+    }
+
 
 
 
@@ -57,7 +64,8 @@ function CartPage() {
         return (
             <>
             <p>You dont have any items in your cart yet.</p>
-            <NavLink to='/'>Shop here</NavLink>
+            {/* <NavLink to='/items/1'>Shop here</NavLink> */}
+            <button className="redirect-btn" onClick={handleRedirectCart}>Shop here</button>
             </>
         )
     }
