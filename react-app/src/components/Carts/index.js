@@ -33,7 +33,7 @@ function CartPage() {
         console.log(subtotalArr)
         subtotalArr.forEach(item => {
             const cart = item.carts.find(cart => cart?.userId === currentUser?.id)
-            subtotal += parseFloat(item.price) * parseInt(cart.quantity)
+            subtotal += parseFloat(item?.price) * parseInt(cart?.quantity)
         })
     }
 

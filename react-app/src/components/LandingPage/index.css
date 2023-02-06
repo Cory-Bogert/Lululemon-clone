@@ -143,3 +143,38 @@
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
 }
+
+.footer {
+  display: fixed;
+  flex-direction: column;
+  /* border:solid 1px red; */
+  width: 100%;
+  bottom: 0;
+}
+
+
+
+.dev-img-holder{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dev-img-holder img{
+  object-fit: cover;
+  height: 200px;
+  width: 170px;
+}
+
+.dev-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dev-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+

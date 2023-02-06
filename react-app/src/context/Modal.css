@@ -32,6 +32,7 @@
 
   #cart-modal-background {
     position: fixed;
+    overflow: scroll;
     top: 0;
     right: 0;
     left: 0;
