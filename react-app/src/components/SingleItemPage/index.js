@@ -163,6 +163,13 @@ function SingleItemPage() {
 
         </div>
 
+        {/* <footer>
+            <div className='footer'>
+
+                <p>© 2023 LuluMelon, Inc</p>
+            </div>
+        </footer> */}
+
 
         </div>
     )

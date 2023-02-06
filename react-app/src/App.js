@@ -13,6 +13,7 @@ import { authenticate } from './store/session';
 import SingleItemPage from './components/SingleItemPage';
 import CartPage from './components/Carts';
 
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -52,6 +53,10 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
+
+        <Route path='/soon' exact={true}>
+          <h1>This Feature is coming soon!</h1>
+        </Route>
         <Route path='/' exact={true}>
           <Landing />
         </Route>

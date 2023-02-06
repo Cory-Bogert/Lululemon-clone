@@ -24,22 +24,22 @@ function Landing() {
         <div className='categories-navbar'>
 
                 <span className='link-span'>
-                    <Link to='/items/1'>Women(wip)</Link>
+                    <Link to='/soon'>Women(wip)</Link>
                 </span>
                 <span className='link-span'>
-                    <Link to='/items/1'>Men(wip)</Link>
+                    <Link to='/soon'>Men(wip)</Link>
                 </span>
                 <span className='link-span'>
-                    <Link to='/items/1'>Accessories(wip)</Link>
+                    <Link to='/soon'>Accessories(wip)</Link>
                 </span>
                 <span className='link-span'>
-                    <Link to='/items/1'>Shoes(wip)</Link>
+                    <Link to='/soon'>Shoes(wip)</Link>
                 </span>
                 <span className='link-span'>
-                    <Link to='/items/1'>Studio(wip)</Link>
+                    <Link to='/soon'>Studio(wip)</Link>
                 </span>
                 <span className='link-span'>
-                <Link to='/items/1'>Like New(wip)</Link>
+                <Link to='/soon'>Like New(wip)</Link>
                 </span>
 
                 {/* <span className='search-bar-container'>
@@ -70,6 +70,24 @@ function Landing() {
 ))}
                 </Carousel>
         </div>
+        <footer>
+            <div className='footer'>
+            <div className='each-dev'>
+                <div className="dev-img-holder">
+                    <img className='img' src='https://media.licdn.com/dms/image/D4E03AQFxAGW_cPRZwQ/profile-displayphoto-shrink_200_200/0/1674225013679?e=1679529600&v=beta&t=W5qXSonUJhsxWL3pVSm_2nDOBGiUqqpm-1umhspVvz0'></img>
+
+                </div>
+                <div className='dev-name'>Cory Bogert</div>
+                <div className='dev-links'>
+
+                <a href='https://github.com/Cory-Bogert' ><i className="fa fa-github"></i></a>
+                <a href='https://www.linkedin.com/in/cory-bogert-754a7a230/'><i className="fa fa-linkedin"></i></a>
+                </div>
+
+            </div>
+                <p>© 2023 LuluMelon, Inc</p>
+            </div>
+        </footer>
     </div>
     )
 }
